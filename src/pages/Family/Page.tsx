@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { ModalDeleteFamily } from './components/Modal';
+import { ModalDeleteFamily } from './components/ModalDelete';
 
 const FAMILIES = [
 	{
