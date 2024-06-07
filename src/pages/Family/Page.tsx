@@ -1,5 +1,6 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { ModalDeleteFamily } from './components/ModalDelete';
+import { Item } from './components/Item';
 
 const FAMILIES = [
 	{
@@ -65,10 +66,12 @@ const FAMILIES = [
 ]
 
 export const FamilyPage = () => {
+	const [familySelected, setFamilySelected] = useState<{ id: string, name: string }>({ id: '', name: '' });
 	const dialogRef = useRef<HTMLDialogElement>(null);
 
-	const openDialog = () => {
+	const openDialog = (id: string, name: string) => {
 		if (dialogRef.current) {
+			setFamilySelected({ id, name });
 			dialogRef.current.showModal();
 		}
 	}
@@ -88,29 +91,17 @@ export const FamilyPage = () => {
 				</div>
 				<article className='flex flex-col gap-2 bg-emerald-100 p-2'>
 					{FAMILIES.map(family =>
-						<div
-							className='flex justify-between items-center text-sm py-1.5 px-3 bg-emerald-50'
+						<Item
 							key={family.id}
-						>
-							<p className='font-medium italic'>{family.name}</p>
-							<div className='flex gap-2'>
-								<button 
-									className='bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:bg-yellow-500 active:opacity-85 px-1 py-0.5 leading-none text-lg rounded-sm'
-									onClick={() => console.log('click en editar')}
-								>
-									<span>&#9998;</span>
-								</button>
-								<button
-									className='bg-red-500 hover:bg-red-600 focus:outline-none focus:bg-red-600 active:opacity-85  text-red-50 px-1 py-0.5 leading-none  text-lg rounded-sm'
-									onClick={openDialog}
-								>
-									<span>&#10007;</span>
-								</button>
-							</div>
-						</div>)}
+							id={family.id}
+							name={family.name}
+							openDialog={() => openDialog(family.id, family.name)}
+						/>
+					)}
 				</article>
 			</section>
 			<ModalDeleteFamily
+				familySelected={familySelected}
 				dialogRef={dialogRef}
 				close={closeDialog}
 			/>
