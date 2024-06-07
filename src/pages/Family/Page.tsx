@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { ModalDeleteFamily } from './components/ModalDelete';
 import { Item } from './components/Item';
+import { ModalUpdateFamily } from './components/ModalUpdate';
 
 const FAMILIES = [
 	{
@@ -67,18 +68,32 @@ const FAMILIES = [
 
 export const FamilyPage = () => {
 	const [familySelected, setFamilySelected] = useState<{ id: string, name: string }>({ id: '', name: '' });
-	const dialogRef = useRef<HTMLDialogElement>(null);
+	const modalToDeleteFamily = useRef<HTMLDialogElement>(null);
+	const modalToUpdateFamily = useRef<HTMLDialogElement>(null);
 
-	const openDialog = (id: string, name: string) => {
-		if (dialogRef.current) {
+	const openModalToDeleteFamily = (id: string, name: string) => {
+		if (modalToDeleteFamily.current) {
 			setFamilySelected({ id, name });
-			dialogRef.current.showModal();
+			modalToDeleteFamily.current.showModal();
 		}
 	}
 
-	const closeDialog = () => {
-		if (dialogRef.current) {
-			dialogRef.current.close();
+	const closeModalToDeleteFamily = () => {
+		if (modalToDeleteFamily.current) {
+			modalToDeleteFamily.current.close();
+		}
+	}
+
+	const openModalToUpdateFamily = (id: string, name: string) => {
+		if (modalToUpdateFamily.current) {
+			setFamilySelected({ id, name });
+			modalToUpdateFamily.current.showModal();
+		}
+	}
+
+	const closeModalToUpdateFamily = () => {
+		if (modalToUpdateFamily.current) {
+			modalToUpdateFamily.current.close();
 		}
 	}
 
@@ -89,22 +104,28 @@ export const FamilyPage = () => {
 					<h1 className='max-sm:text-xl text-2xl font-semibold'>Listado</h1>
 					<button className='bg-emerald-800 text-emerald-50 max-sm:text-xs text-sm px-4 py-1.5 font-semibold tracking-wide rounded-sm hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85'>Crear Familia</button>
 				</div>
-				<article className='flex flex-col gap-2 bg-emerald-100 p-2'>
+				<article className='flex flex-col gap-2 bg-emerald-200 p-2'>
 					{FAMILIES.map(family =>
 						<Item
 							key={family.id}
 							id={family.id}
 							name={family.name}
-							openDialog={() => openDialog(family.id, family.name)}
+							openModalToDelete={() => openModalToDeleteFamily(family.id, family.name)}
+							openModalToUpdate={() => openModalToUpdateFamily(family.id, family.name)}
 						/>
 					)}
 				</article>
 			</section>
 			<ModalDeleteFamily
 				familySelected={familySelected}
-				dialogRef={dialogRef}
-				close={closeDialog}
+				dialogRef={modalToDeleteFamily}
+				close={closeModalToDeleteFamily}
+			/>
+			<ModalUpdateFamily
+				familySelected={familySelected}
+				dialogRef={modalToUpdateFamily}
+				close={closeModalToUpdateFamily}
 			/>
 		</div>
-	)
+	);
 }

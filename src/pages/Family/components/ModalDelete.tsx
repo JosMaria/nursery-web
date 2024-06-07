@@ -1,12 +1,12 @@
 import { Modal } from '@nursery/components';
 
-type ModalDeleteFamily = {
+type ModalDeleteFamilyProps = {
   familySelected: { id: string, name: string };
   dialogRef: React.RefObject<HTMLDialogElement>;
   close: () => void;
 }
 
-export const ModalDeleteFamily = ({ familySelected, dialogRef, close }: ModalDeleteFamily) => (
+export const ModalDeleteFamily = ({ familySelected, dialogRef, close }: ModalDeleteFamilyProps) => (
   <Modal dialogRef={dialogRef}>
     <div className='bg-emerald-100 border-4 border-emerald-800 rounded max-w-xs md:max-w-md w-full p-1 m-1'>
       <h1 className='font-semibold text-center text-lg md:text-xl'>Eliminar Familia</h1>
