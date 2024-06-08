@@ -4,7 +4,7 @@ type ItemProps = {
   openModalToDelete: () => void;
   openModalToUpdate: () => void;
 }
-export const Item = ({ id, name, openModalToDelete, openModalToUpdate }: ItemProps) => (
+export const Item = ({ name, openModalToDelete, openModalToUpdate }: ItemProps) => (
   <div className='flex justify-between items-center text-sm py-1 px-3 bg-emerald-50'>
     <p className='font-medium italic'>{name}</p>
     <div className='flex gap-2'>

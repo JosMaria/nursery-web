@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { ModalDeleteFamily } from './components/ModalDelete';
 import { Item } from './components/Item';
 import { ModalUpdateFamily } from './components/ModalUpdate';
+import { ModalCreateFamily } from './components/ModalCreate';
 
 const FAMILIES = [
 	{
@@ -70,6 +71,7 @@ export const FamilyPage = () => {
 	const [familySelected, setFamilySelected] = useState<{ id: string, name: string }>({ id: '', name: '' });
 	const modalToDeleteFamily = useRef<HTMLDialogElement>(null);
 	const modalToUpdateFamily = useRef<HTMLDialogElement>(null);
+	const modalToCreateFamily = useRef<HTMLDialogElement>(null);
 
 	const openModalToDeleteFamily = (id: string, name: string) => {
 		if (modalToDeleteFamily.current) {
@@ -97,12 +99,29 @@ export const FamilyPage = () => {
 		}
 	}
 
+	const openModalToCreateFamily = () => {
+		if (modalToCreateFamily.current) {
+			modalToCreateFamily.current.showModal();
+		}
+	}
+
+	const closeModalToCreateFamily = () => {
+		if (modalToCreateFamily.current) {
+			modalToCreateFamily.current.close();
+		}
+	}
+
 	return (
 		<div className='flex justify-center w-full'>
 			<section className='flex flex-col gap-1 max-w-sm w-full p-1'>
 				<div className='flex justify-between items-center sticky top-0 bg-emerald-50 py-1'>
 					<h1 className='max-sm:text-xl text-2xl font-semibold'>Listado</h1>
-					<button className='bg-emerald-800 text-emerald-50 max-sm:text-xs text-sm px-4 py-1.5 font-semibold tracking-wide rounded-sm hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85'>Crear Familia</button>
+					<button
+						className='bg-emerald-800 text-emerald-50 max-sm:text-xs text-sm px-3 py-1 font-semibold tracking-wide rounded-sm hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85'
+						onClick={openModalToCreateFamily}
+					>
+						Crear Familia
+					</button>
 				</div>
 				<article className='flex flex-col gap-2 bg-emerald-200 p-2'>
 					{FAMILIES.map(family =>
@@ -125,6 +144,10 @@ export const FamilyPage = () => {
 				familySelected={familySelected}
 				dialogRef={modalToUpdateFamily}
 				close={closeModalToUpdateFamily}
+			/>
+			<ModalCreateFamily
+				dialogRef={modalToCreateFamily}
+				close={closeModalToCreateFamily}
 			/>
 		</div>
 	);
