@@ -1,8 +1,8 @@
 import { Modal } from '@nursery/components';
 
 type ModalDeleteFamilyProps = {
-  familySelected: { id: string, name: string };
   dialogRef: React.RefObject<HTMLDialogElement>;
+  familySelected: { id: string, name: string };
   close: () => void;
 }
 

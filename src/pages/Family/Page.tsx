@@ -3,9 +3,11 @@ import { ModalDeleteFamily } from './components/ModalDelete';
 import { Item } from './components/Item';
 import { ModalUpdateFamily } from './components/ModalUpdate';
 import { ModalCreateFamily } from './components/ModalCreate';
+import { useQuery } from '@tanstack/react-query';
+import { fetchAllFamilies } from './services';
 
-const FAMILIES = [
-	{
+/*
+{
 		id: '35ad1fac-3cef-4430-9fce-bdeac4737d1d',
 		name: 'euphorbiaceae'
 	},
@@ -65,13 +67,19 @@ const FAMILIES = [
 		id: 'f3604e7c-79fd-4d5f-9210-i7f0d5b23639',
 		name: 'malvaceae'
 	},
-]
+*/
+// const FAMILIES = [];
 
 export const FamilyPage = () => {
 	const [familySelected, setFamilySelected] = useState<{ id: string, name: string }>({ id: '', name: '' });
 	const modalToDeleteFamily = useRef<HTMLDialogElement>(null);
 	const modalToUpdateFamily = useRef<HTMLDialogElement>(null);
 	const modalToCreateFamily = useRef<HTMLDialogElement>(null);
+
+	const { data: families, isPending, isError, isSuccess } = useQuery({
+		queryKey: ['families'],
+		queryFn: fetchAllFamilies,
+	});
 
 	const openModalToDeleteFamily = (id: string, name: string) => {
 		if (modalToDeleteFamily.current) {
@@ -123,17 +131,22 @@ export const FamilyPage = () => {
 						Crear Familia
 					</button>
 				</div>
-				<article className='flex flex-col gap-2 bg-emerald-200 p-2'>
-					{FAMILIES.map(family =>
-						<Item
-							key={family.id}
-							id={family.id}
-							name={family.name}
-							openModalToDelete={() => openModalToDeleteFamily(family.id, family.name)}
-							openModalToUpdate={() => openModalToUpdateFamily(family.id, family.name)}
-						/>
-					)}
-				</article>
+				{isPending && <p>Cargando...</p>}
+				{isError && <p>Mensaje de error al cargar los datos</p>}
+				{isSuccess && <article className='flex flex-col gap-2 bg-emerald-200 p-2'>
+					{families.length === 0 ?
+						<p className='text-base font-medium text-center p-2 bg-emerald-50 leading-tight'>No se encontro ninguna familia registrada</p> :
+						families.map(family =>
+							<Item
+								key={family.id}
+								id={family.id}
+								name={family.name}
+								openModalToDelete={() => openModalToDeleteFamily(family.id, family.name)}
+								openModalToUpdate={() => openModalToUpdateFamily(family.id, family.name)}
+							/>
+						)
+					}
+				</article>}
 			</section>
 			<ModalDeleteFamily
 				familySelected={familySelected}
