@@ -6,70 +6,6 @@ import { ModalCreateFamily } from './components/ModalCreate';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllFamilies } from './services';
 
-/*
-{
-		id: '35ad1fac-3cef-4430-9fce-bdeac4737d1d',
-		name: 'euphorbiaceae'
-	},
-	{
-		id: 'af3b6c76-bb2f-40aa-9264-882da0798282',
-		name: 'fabaceae'
-	},
-	{
-		id: '274e8eb3-87a9-4bc7-bd20-acaecb9d42c9',
-		name: 'asparagaceae'
-	},
-	{
-		id: 'a6c98aad-e334-411f-9907-7dfb7e397cbc',
-		name: 'solanaceae'
-	},
-	{
-		id: 'f3604e7c-79fd-4d5f-9210-a7f0d5b23638',
-		name: 'lamiaceae'
-	},
-	{
-		id: 'f3604e7c-79fd-4d5f-9210-a7f0d5b23639',
-		name: 'salicaceae'
-	},
-	{
-		id: 'f3604e7c-79fd-4d5f-9210-b7f0d5b23639',
-		name: 'asphodelaceae'
-	},
-	{
-		id: 'f3604e7c-79fd-4d5f-9210-c7f0d5b23639',
-		name: 'amaryllidaceae'
-	},
-	{
-		id: 'f3604e7c-79fd-4d5f-9210-d7f0d5b23639',
-		name: 'commelinaceae'
-	},
-	{
-		id: 'f3604e7c-79fd-4d5f-9210-37f0d5b23639',
-		name: 'araceae'
-	},
-	{
-		id: 'f3604e7c-79fd-4d5f-9210-e7f0d5b23639',
-		name: 'ruscaceae'
-	},
-	{
-		id: 'f3604e7c-79fd-4d5f-9210-f7f0d5b23639',
-		name: 'begoniaceae'
-	},
-	{
-		id: 'f3604e7c-79fd-4d5f-9210-g7f0d5b23639',
-		name: 'verbenaceae'
-	},
-	{
-		id: 'f3604e7c-79fd-4d5f-9210-h7f0d5b23639',
-		name: 'apocynaceae'
-	},
-	{
-		id: 'f3604e7c-79fd-4d5f-9210-i7f0d5b23639',
-		name: 'malvaceae'
-	},
-*/
-// const FAMILIES = [];
-
 export const FamilyPage = () => {
 	const [familySelected, setFamilySelected] = useState<{ id: string, name: string }>({ id: '', name: '' });
 	const modalToDeleteFamily = useRef<HTMLDialogElement>(null);
@@ -131,7 +67,12 @@ export const FamilyPage = () => {
 						Crear Familia
 					</button>
 				</div>
-				{isPending && <p>Cargando...</p>}
+				{isPending && (
+					<div className='flex flex-col items-center gap-1 p-2'>
+						<div className='w-10 h-10 animate-spin rounded-full border-4 border-y-emerald-800' />
+						<p className='text-sm font-medium'>Cargando</p>
+					</div>
+				)}
 				{isError && <p>Mensaje de error al cargar los datos</p>}
 				{isSuccess && <article className='flex flex-col gap-2 bg-emerald-200 p-2'>
 					{families.length === 0 ?
