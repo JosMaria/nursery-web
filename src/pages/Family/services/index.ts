@@ -13,3 +13,8 @@ export const fetchAllFamilies = async (): Promise<FamilyResponseType[]> => {
   const { data } = await axiosInstance.get<FamilyResponseType[]>('families');
   return data;
 };
+
+export const postFamily = async (payload: PayloadCreateFamilyType) => {
+  const { data } = await axiosInstance.post<AnswerCreateFamilyType>('families', payload);
+  return data;
+};
