@@ -18,3 +18,8 @@ export const postFamilies = async (payload: PayloadCreateFamilyType[]) => {
   const { data } = await axiosInstance.post<AnswerCreateFamilyType[]>('families/batch', payload);
   return data;
 };
+
+export const deleteFamilyByID = async (id: string) => {
+  const { data } = await axiosInstance.delete<AnswerCreateFamilyType>(`families/${id}`);
+  return data;
+};
