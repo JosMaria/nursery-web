@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { Modal } from '@nursery/components';
-import { useForm } from 'react-hook-form';
-import { postFamily } from '../services';
+import { postFamilies } from '../services';
 
-type FormType = {
-  name: string;
+type FormValuesType = {
+  families: { name: string; }[];
 };
 
 type ModalCreateFamilyProps = {
@@ -19,14 +19,22 @@ export const ModalCreateFamily = ({ dialogRef, close }: ModalCreateFamilyProps) 
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
-  } = useForm<FormType>({
-    defaultValues: { name: '' },
+  } = useForm<FormValuesType>({
+    defaultValues: {
+      families: [{ name: '' }]
+    },
     mode: 'onBlur',
   });
 
+  const { fields, remove, append } = useFieldArray<FormValuesType>({
+    control,
+    name: 'families',
+  });
+
   const { mutate: createFamilyMutate, isPending } = useMutation({
-    mutationFn: postFamily,
+    mutationFn: postFamilies,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['families'] });
       reset();
@@ -71,36 +79,46 @@ export const ModalCreateFamily = ({ dialogRef, close }: ModalCreateFamilyProps) 
           lo quiere omitir haga click en 'x', la familia debe ser
           una palabra en minuculas y que no sea una familia ya existente
         </p>
-        <form className='flex flex-col items-center gap-2 p-1' onSubmit={handleSubmit(formData => createFamilyMutate(formData))}>
-          <div className='flex flex-col justify-center gap-0.5 max-w-xs w-full'>
-            <div className='flex items-center gap-2'>
-              <input
-                className='flex-1 px-2 py-1 text-xs sm:text-sm rounded-sm focus:outline-none border-2 border-transparent focus:border-emerald-800'
-                type='text'
-                placeholder='nombre'
-                autoComplete='off'
-                autoCorrect='off'
-                {...register('name', {
-                  pattern: { value: /^[a-z]+$/, message: 'Debe ser una palabra en minusculas' },
-                  required: { value: true, message: 'No deje el campo de texto vacio' }
-                })}
-              />
-              <button
-                className='bg-emerald-800 text-emerald-50 hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85 leading-none px-2 py-0.5 text-xl font-bold rounded-sm'
-              >
-                +
-              </button>
-              <button
-                className='bg-red-500 text-red-50 hover:bg-red-600 focus:outline-none focus:bg-red-600 active:opacity-85 leading-none px-2 py-1 font-bold rounded-sm'
-              >
-                x
-              </button>
-            </div>
-            {<p className='text-xs rounded px-1 text-red-500 font-semibold w-fit'>{errors.name?.message}</p>}
-          </div>
+        <form className='flex flex-col items-center gap-2 p-1' onSubmit={handleSubmit(formData => createFamilyMutate(formData.families))}>
+          <section className='flex flex-col justify-center gap-2 max-w-xs w-full p-2'>
+            {fields.map((field, index) => (
+              <fieldset className='flex flex-col gap-0.5' key={field.id}>
+                <div className='flex items-center gap-2'>
+                  <input
+                    className='px-2 py-1 w-64 text-xs sm:text-sm rounded-sm focus:outline-none border-2 border-transparent focus:border-emerald-800'
+                    type='text'
+                    placeholder='nombre'
+                    autoComplete='off'
+                    autoCorrect='off'
+                    {...register(`families.${index}.name` as const, {
+                      pattern: { value: /^[a-z]+$/, message: 'Debe ser una palabra en minusculas' },
+                      required: { value: true, message: 'No deje el campo de texto vacio' }
+                    })}
+                  />
+                  {index !== 0 && (
+                    <button
+                      className='bg-red-500 text-red-50 hover:bg-red-600 focus:outline-none focus:bg-red-600 active:opacity-85 leading-none px-2 py-1 font-bold rounded-sm'
+                      type='button'
+                      onClick={() => remove(index)}
+                    >
+                      x
+                    </button>
+                  )}
+                </div>
+                <p className='text-xs rounded px-1 text-red-500 font-semibold w-fit'>{errors.families?.[index]?.name?.message}</p>
+              </fieldset>
+            ))}
+            <button
+              className='self-start bg-emerald-800 text-emerald-50 hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85 leading-none px-6 py-1.5 font-semibold text-sm rounded-sm'
+              type='button'
+              onClick={() => append({ name: '' })}
+            >
+              +1 Familia
+            </button>
+          </section>
           {buttons}
         </form>
-      </div>
-    </Modal>
+      </div >
+    </Modal >
   );
 }

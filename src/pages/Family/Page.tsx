@@ -1,10 +1,7 @@
-import { useRef, useState } from 'react'
-import { ModalDeleteFamily } from './components/ModalDelete';
-import { Item } from './components/Item';
-import { ModalUpdateFamily } from './components/ModalUpdate';
-import { ModalCreateFamily } from './components/ModalCreate';
+import { ModalUpdateFamily, ModalCreateFamily, ModalDeleteFamily, Item } from './components';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllFamilies } from './services';
+import { useRef, useState } from 'react'
 
 export const FamilyPage = () => {
 	const [familySelected, setFamilySelected] = useState<{ id: string, name: string }>({ id: '', name: '' });
