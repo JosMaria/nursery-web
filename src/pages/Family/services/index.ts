@@ -23,3 +23,8 @@ export const deleteFamilyByID = async (id: string) => {
   const { data } = await axiosInstance.delete<AnswerCreateFamilyType>(`families/${id}`);
   return data;
 };
+
+export const updateFamilyNameByID = async (id: string, nameUpdated: string) => {
+  const { data } = await axiosInstance.patch<AnswerCreateFamilyType>(`families/${id}`, { name: nameUpdated });
+  return data;
+}
