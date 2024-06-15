@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { ButtonPending, Modal } from '@nursery/components';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { Modal } from '@nursery/components';
 import { postFamilies } from '../services';
 
 type FormValuesType = {
@@ -44,31 +44,6 @@ export const ModalCreateFamily = ({ dialogRef, close }: ModalCreateFamilyProps) 
       console.log('error request');
     },
   });
-
-  const buttons = (
-    <div className='flex justify-center gap-5'>
-      <button
-        className='flex items-center justify-center gap-2 text-sm w-28 px-2 py-1 font-semibold tracking-wide rounded-sm bg-emerald-800 text-emerald-50 hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85'
-        disabled={isPending}
-        type='submit'
-      >
-        {isPending ?
-          <>
-            <p>Cargando</p>
-            <div className='w-3 h-3 animate-spin rounded-full border-2 border-x-emerald-800' />
-          </> :
-          'Crear'
-        }
-      </button>
-      <button
-        className='text-sm w-28 px-2 py-1 font-semibold tracking-wide rounded-sm bg-emerald-800 text-emerald-50 hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85'
-        type='reset'
-        onClick={close}
-      >
-        Cancelar
-      </button>
-    </div>
-  );
 
   return (
     <Modal dialogRef={dialogRef}>
@@ -116,7 +91,23 @@ export const ModalCreateFamily = ({ dialogRef, close }: ModalCreateFamilyProps) 
               +1 Familia
             </button>
           </section>
-          {buttons}
+          <div className='flex justify-center gap-5'>
+            {isPending ? <ButtonPending /> : (
+              <button
+                className='flex items-center justify-center gap-2 text-sm w-28 px-2 py-1 font-semibold tracking-wide rounded-sm bg-emerald-800 text-emerald-50 hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85'
+                type='submit'
+              >
+                Crear
+              </button>
+            )}
+            <button
+              className='text-sm w-28 px-2 py-1 font-semibold tracking-wide rounded-sm bg-emerald-800 text-emerald-50 hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85'
+              type='reset'
+              onClick={close}
+            >
+              Cancelar
+            </button>
+          </div>
         </form>
       </div >
     </Modal >

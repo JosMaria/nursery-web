@@ -23,6 +23,7 @@
     "baseUrl": "./",
     "paths": {
       "@nursery/components": ["src/components"],
+      "@nursery/styles": ["src/styles"],
     }
   },
   "include": ["src"],
