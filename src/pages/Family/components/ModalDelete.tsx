@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ButtonPending, Modal } from '@nursery/components';
+import { ButtonRed, ButtonText, Title } from '@nursery/styles';
+import { Modal, Sending } from '@nursery/components';
 import { deleteFamilyByID } from '../services';
 
 type ModalDeleteFamilyProps = {
@@ -22,35 +23,25 @@ export const ModalDeleteFamily = ({ familySelected, dialogRef, close }: ModalDel
     },
   });
 
-  const handleClickDeleteButton = () => {
-    deleteFamilyByIDMutate(familySelected.id);
-    close();
-  };
-
   return (
     <Modal dialogRef={dialogRef}>
-      <div className='bg-emerald-100 border-4 border-emerald-800 rounded max-w-xs md:max-w-md w-full p-1 m-1'>
-        <h1 className='font-semibold text-center text-lg md:text-xl'>Eliminar Familia</h1>
-        <p className='text-sm md:text-base px-1 md:px-3 py-1 text-justify leading-tight'>
-          Al momento de eliminar la familia '<b>{familySelected.name}</b>' las plantas que fueron asignadas con esta familia se veran afectadas
+      <div className='flex flex-col bg-nursery-medium border-4 border-nursery-dark rounded max-w-xs md:max-w-md w-full p-1 m-1'>
+        <header className='flex justify-between'>
+          <Title>Eliminar Familiar</Title>
+          <ButtonRed className='self-start p-1 leading-none text-xs font-bold' onClick={close}>
+            &#10005;
+          </ButtonRed>
+        </header>
+        <p className='text-xs sm:text-sm p-1 leading-tight text-justify'>
+          Al momento de eliminar la familia '<b>{familySelected.name}</b>'
+          las plantas que fueron asignadas con esta familia se veran afectadas
         </p>
-        <div className='flex justify-center gap-5 p-1 mt-1'>
-          {isPending ? <ButtonPending /> : (
-            <button
-              className='bg-red-500 hover:bg-red-600 focus:outline-none focus:bg-red-600 active:opacity-85 text-red-50 px-4 py-1.5 leading-none text-sm font-semibold rounded-sm'
-              onClick={handleClickDeleteButton}
-            >
-              Eliminar
-            </button>
-          )}
-          <button
-            className='bg-red-500 hover:bg-red-600 focus:outline-none focus:bg-red-600 active:opacity-85  text-red-50 px-4 py-1.5 leading-none text-sm font-semibold rounded-sm'
-            onClick={close}
-          >
-            Cancelar
-          </button>
-        </div>
+        {isPending ? <Sending /> : (
+          <ButtonText className='button self-center' onClick={() => deleteFamilyByIDMutate(familySelected.id)}>
+            Si, Eliminar
+          </ButtonText>
+        )}
       </div>
     </Modal>
   );
-}
+};

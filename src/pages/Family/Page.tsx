@@ -43,8 +43,6 @@ export const FamilyPage = () => {
 		}
 	}
 
-
-
 	const closeModalToUpdateFamily = () => {
 		if (modalToUpdateFamily.current) {
 			modalToUpdateFamily.current.close();
@@ -75,7 +73,7 @@ export const FamilyPage = () => {
 					families.length !== 0 ?
 						<FamilyList
 							families={families}
-
+							openModalToDeleteFamily={openModalToDeleteFamily}
 						/> :
 						<p className='text-base font-medium text-center px-1 py-4 leading-tight bg-nursery-medium'>
 							No se encontro ninguna familia registrada
