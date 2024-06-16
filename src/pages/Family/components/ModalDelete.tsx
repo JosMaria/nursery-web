@@ -35,7 +35,7 @@ export const ModalDeleteFamily = ({ familySelected, dialogRef, close }: ModalDel
           Al momento de eliminar la familia '<b>{familySelected.name}</b>' las plantas que fueron asignadas con esta familia se veran afectadas
         </p>
         <div className='flex justify-center gap-5 p-1 mt-1'>
-          {!isPending ? <ButtonPending /> : (
+          {isPending ? <ButtonPending /> : (
             <button
               className='bg-red-500 hover:bg-red-600 focus:outline-none focus:bg-red-600 active:opacity-85 text-red-50 px-4 py-1.5 leading-none text-sm font-semibold rounded-sm'
               onClick={handleClickDeleteButton}

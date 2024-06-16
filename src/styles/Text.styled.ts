@@ -1,0 +1,20 @@
+import styled from 'styled-components';
+
+export const Title = styled.h1`
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+
+  @media not all and (min-width: 640px) {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+`;
+
+export const TextFormValidation = styled.p`
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgb(239 68 68);
+  font-weight: 600;
+  width: fit-content;
+`;

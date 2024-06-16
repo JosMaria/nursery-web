@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 
+export const ButtonText = styled.button`
+  font-size: 0.75rem;
+  line-height: 1rem;
+  padding: 0.25rem 1rem;
+  font-weight: 500;
+  border-radius: 0.125rem;
+
+  @media (min-width: 640px) {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+`;
+
 export const ButtonYellow = styled.button`
   background-color: rgb(250 204 21 / 1);
   color: rgb(66 32 6 / 1);

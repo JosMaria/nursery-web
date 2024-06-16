@@ -1,6 +1,7 @@
+import { ButtonRed, ButtonText, TextFormValidation, Title, InputText } from '@nursery/styles';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ButtonPending, Modal } from '@nursery/components';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { Modal, Sending } from '@nursery/components';
 import { postFamilies } from '../services';
 
 type FormValuesType = {
@@ -45,10 +46,20 @@ export const ModalCreateFamily = ({ dialogRef, close }: ModalCreateFamilyProps) 
     },
   });
 
+  const closeModal = () => {
+    reset();
+    close();
+  }
+
   return (
     <Modal dialogRef={dialogRef}>
-      <div className='bg-emerald-100 border-4 border-emerald-800 rounded max-w-sm md:max-w-lg w-full p-1 m-1'>
-        <h1 className='font-semibold text-center text-lg md:text-xl'>Crear Familias</h1>
+      <div className='bg-nursery-medium border-4 border-nursery-dark rounded max-w-sm md:max-w-lg w-full p-1 m-1'>
+        <header className='flex justify-between'>
+          <Title>Crear Familias</Title>
+          <ButtonRed className='self-start p-1 leading-none text-xs font-bold' onClick={closeModal}>
+            &#10005;
+          </ButtonRed>
+        </header>
         <p className='text-sm p-1 leading-tight text-justify'>
           <b>Nota:</b> Puede crear mas de una familia haciendo click del boton '+' y si quiere
           lo quiere omitir haga click en 'x', la familia debe ser
@@ -59,8 +70,8 @@ export const ModalCreateFamily = ({ dialogRef, close }: ModalCreateFamilyProps) 
             {fields.map((field, index) => (
               <fieldset className='flex flex-col gap-0.5' key={field.id}>
                 <div className='flex items-center gap-2'>
-                  <input
-                    className='px-2 py-1 w-64 text-xs sm:text-sm rounded-sm focus:outline-none border-2 border-transparent focus:border-emerald-800'
+                  <InputText
+                    className='input w-60'
                     type='text'
                     placeholder='nombre'
                     autoComplete='off'
@@ -70,46 +81,22 @@ export const ModalCreateFamily = ({ dialogRef, close }: ModalCreateFamilyProps) 
                       required: { value: true, message: 'No deje el campo de texto vacio' }
                     })}
                   />
-                  {index !== 0 && (
-                    <button
-                      className='bg-red-500 text-red-50 hover:bg-red-600 focus:outline-none focus:bg-red-600 active:opacity-85 leading-none px-2 py-1 font-bold rounded-sm'
-                      type='button'
-                      onClick={() => remove(index)}
-                    >
-                      x
-                    </button>
-                  )}
+                  {index !== 0 &&
+                    <ButtonRed className='p-1 leading-none text-xs font-bold' type='button' onClick={() => remove(index)}>
+                      &#10005;
+                    </ButtonRed>
+                  }
                 </div>
-                <p className='text-xs rounded px-1 text-red-500 font-semibold w-fit'>{errors.families?.[index]?.name?.message}</p>
+                <TextFormValidation>{errors.families?.[index]?.name?.message}</TextFormValidation>
               </fieldset>
             ))}
-            <button
-              className='self-start bg-emerald-800 text-emerald-50 hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85 leading-none px-6 py-1.5 font-semibold text-sm rounded-sm'
-              type='button'
-              onClick={() => append({ name: '' })}
-            >
+            <ButtonText className='button self-start' type='button' onClick={() => append({ name: '' })}>
               +1 Familia
-            </button>
+            </ButtonText>
           </section>
-          <div className='flex justify-center gap-5'>
-            {isPending ? <ButtonPending /> : (
-              <button
-                className='flex items-center justify-center gap-2 text-sm w-28 px-2 py-1 font-semibold tracking-wide rounded-sm bg-emerald-800 text-emerald-50 hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85'
-                type='submit'
-              >
-                Crear
-              </button>
-            )}
-            <button
-              className='text-sm w-28 px-2 py-1 font-semibold tracking-wide rounded-sm bg-emerald-800 text-emerald-50 hover:bg-emerald-900 focus:outline-none focus:bg-emerald-900 active:opacity-85'
-              type='reset'
-              onClick={close}
-            >
-              Cancelar
-            </button>
-          </div>
+          {isPending ? <Sending /> : <ButtonText className='button' type='submit'>Crear Familias</ButtonText>}
         </form>
       </div >
     </Modal >
   );
-}
+};

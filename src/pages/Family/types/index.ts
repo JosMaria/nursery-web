@@ -2,7 +2,7 @@ type PayloadCreateFamilyType = {
   name: string;
 };
 
-type AnswerCreateFamilyType = {
+type AnswerFamilyType = {
 	id: string;
 	name: string;
 };
