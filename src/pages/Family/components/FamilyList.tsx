@@ -2,11 +2,10 @@ import { ButtonRed, ButtonYellow } from '@nursery/styles'
 
 type FamilyListProps = {
   families: AnswerFamilyType[];
-  openModalToDeleteFamily: (id: string, name: string) => void;
-  openModalToUpdateFamily: (id: string, name: string) => void;
-}
+  openModal: (modalType: ModalType) => void;
+};
 
-export const FamilyList = ({ families, openModalToDeleteFamily, openModalToUpdateFamily }: FamilyListProps) => (
+export const FamilyList = ({ families, openModal }: FamilyListProps) => (
   <>
     {families.length === 0 ? (
       <p className='text-center font-medium max-sm:text-sm p-3 bg-nursery-medium w-full border-nursery-dark border-2'>
@@ -18,10 +17,16 @@ export const FamilyList = ({ families, openModalToDeleteFamily, openModalToUpdat
           <article className='flex justify-between items-center py-1 px-3 bg-nursery-light' key={family.id}>
             <p className='font-medium text-sm italic'>{family.name}</p>
             <div className='flex gap-2 text-lg'>
-              <ButtonYellow className='px-1 py-0.5 leading-none rounded-sm' onClick={() => openModalToUpdateFamily(family.id, family.name)}>
+              <ButtonYellow
+                className='px-1 py-0.5 leading-none rounded-sm'
+                onClick={() => openModal({ type: 'update', familySelected: { id: family.id, name: family.name } })}
+              >
                 <span>&#9998;</span>
               </ButtonYellow>
-              <ButtonRed className='px-1 py-0.5 leading-none rounded-sm' onClick={() => openModalToDeleteFamily(family.id, family.name)}>
+              <ButtonRed 
+                className='px-1 py-0.5 leading-none rounded-sm' 
+                onClick={() => openModal({ type: 'delete', familySelected: { id: family.id, name: family.name } })}
+              >
                 <span>&#10007;</span>
               </ButtonRed>
             </div>
