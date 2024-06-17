@@ -53,7 +53,7 @@ export const ModalCreateFamily = ({ dialogRef, close }: ModalCreateFamilyProps) 
 
   return (
     <Modal dialogRef={dialogRef}>
-      <div className='bg-nursery-medium border-4 border-nursery-dark rounded max-w-sm md:max-w-lg w-full p-1 m-1'>
+      <div className='bg-nursery-medium border-4 border-nursery-dark rounded max-w-xs md:max-w-md w-full p-1 m-1'>
         <header className='flex justify-between'>
           <Title>Crear Familias</Title>
           <ButtonRed className='self-start p-1 leading-none text-xs font-bold' onClick={closeModal}>
@@ -66,12 +66,12 @@ export const ModalCreateFamily = ({ dialogRef, close }: ModalCreateFamilyProps) 
           una palabra en minuculas y que no sea una familia ya existente
         </p>
         <form className='flex flex-col items-center gap-2 p-1' onSubmit={handleSubmit(formData => createFamilyMutate(formData.families))}>
-          <section className='flex flex-col justify-center gap-2 max-w-xs w-full p-2'>
+          <section className='flex flex-col justify-center gap-2 max-w-xs w-full p-1'>
             {fields.map((field, index) => (
               <fieldset className='flex flex-col gap-0.5' key={field.id}>
                 <div className='flex items-center gap-2'>
                   <InputText
-                    className='input w-60'
+                    className='input max-w-64 w-full'
                     type='text'
                     placeholder='nombre'
                     autoComplete='off'

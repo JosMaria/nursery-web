@@ -16,5 +16,6 @@ export const TextFormValidation = styled.p`
   line-height: 1rem;
   color: rgb(239 68 68);
   font-weight: 600;
+  padding: 0 0.1rem;
   width: fit-content;
 `;

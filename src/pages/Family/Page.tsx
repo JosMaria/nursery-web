@@ -74,6 +74,7 @@ export const FamilyPage = () => {
 						<FamilyList
 							families={families}
 							openModalToDeleteFamily={openModalToDeleteFamily}
+							openModalToUpdateFamily={openModalToUpdateFamily}
 						/> :
 						<p className='text-base font-medium text-center px-1 py-4 leading-tight bg-nursery-medium'>
 							No se encontro ninguna familia registrada
