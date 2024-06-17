@@ -1,5 +1,5 @@
 export const Footer = () => (
-	<footer className='flex justify-evenly flex-wrap max-xl:gap-5 gap-8 bg-emerald-800 text-emerald-50 p-3'>
+	<footer className='flex justify-evenly flex-wrap max-xl:gap-5 gap-8 bg-nursery-dark text-nursery-light p-3'>
 		<article className='max-w-2xl w-full'>
 			<h2 className='text-base sm:text-xl font-semibold mb-1'>Antecedentes hist&oacute;ricos FDRyT</h2>
 			<p className='text-justify max-md:text-sm max-md:font-light'>

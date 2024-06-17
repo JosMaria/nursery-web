@@ -1,6 +1,6 @@
 export const Loader = () => (
   <div className='flex flex-col items-center gap-1 w-fit p-2'>
-    <div className='w-10 h-10 animate-spin rounded-full border-4 border-y-emerald-800 border-x-transparent' />
+    <div className='w-10 h-10 animate-spin rounded-full border-4 border-y-black border-x-transparent' />
     <p className='text-sm font-medium'>Cargando</p>
   </div>
 );

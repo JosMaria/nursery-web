@@ -1,7 +1,6 @@
 export const Header = () => {
-
 	return (
-		<header className="bg-emerald-800 text-emerald-50">
+		<header className='bg-nursery-dark text-nursery-light'>
 			Header
 		</header>
 	)

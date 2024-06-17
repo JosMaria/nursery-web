@@ -68,17 +68,12 @@ export const FamilyPage = () => {
 				</div>
 				{isPending && <Loader />}
 				{isError && <p>Mensaje de error al cargar los datos</p>}
-
 				{isSuccess && (
-					families.length !== 0 ?
-						<FamilyList
-							families={families}
-							openModalToDeleteFamily={openModalToDeleteFamily}
-							openModalToUpdateFamily={openModalToUpdateFamily}
-						/> :
-						<p className='text-base font-medium text-center px-1 py-4 leading-tight bg-nursery-medium'>
-							No se encontro ninguna familia registrada
-						</p>
+					<FamilyList
+						families={families}
+						openModalToDeleteFamily={openModalToDeleteFamily}
+						openModalToUpdateFamily={openModalToUpdateFamily}
+					/>
 				)}
 			</section>
 			<ModalDeleteFamily
