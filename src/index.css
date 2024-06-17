@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --color-light: 236, 253, 245;
+    --color-medium: 209, 250, 229;
+    --color-dark: 6, 95, 70;
+    --color-dark-hover: 6, 78, 59
+  }
+}
+
+@layer components {
+  .button {
+    @apply bg-nursery-dark text-nursery-light hover:bg-nursery-dark-hover focus:outline-none focus:bg-nursery-dark-hover focus:shadow-sm focus:shadow-black active:opacity-85;
+  }
+
+  .input {
+    @apply bg-nursery-light border-2 border-transparent focus:outline-none focus:border-nursery-dark;
+  }
+}
