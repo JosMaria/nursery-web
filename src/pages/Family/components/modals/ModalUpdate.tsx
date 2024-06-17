@@ -1,15 +1,15 @@
 import { ButtonRed, ButtonText, InputText, TextFormValidation, Title } from '@nursery/styles';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateFamilyNameByID } from '../services';
+import { updateFamilyNameByID } from '../../services';
 import { Sending } from '@nursery/components';
 import { useForm } from 'react-hook-form';
 
-type ModalUpdateFamilyProps = {
+type ModalUpdateProps = {
   familySelected: { id: string, name: string };
   close: () => void;
 }
 
-export const ModalUpdateFamily = ({ familySelected, close }: ModalUpdateFamilyProps) => {
+export const ModalUpdate = ({ familySelected, close }: ModalUpdateProps) => {
   const queryClient = useQueryClient();
   const { register, handleSubmit, reset, formState: { errors } } = useForm<{ name: string }>();
 

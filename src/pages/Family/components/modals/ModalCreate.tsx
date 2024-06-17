@@ -2,17 +2,17 @@ import { ButtonRed, ButtonText, TextFormValidation, Title, InputText } from '@nu
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Sending } from '@nursery/components';
-import { postFamilies } from '../services';
+import { postFamilies } from '../../services';
 
 type FormValuesType = {
   families: { name: string; }[];
 };
 
-type ModalCreateFamilyProps = {
+type ModalCreateProps = {
   close: () => void;
 };
 
-export const ModalCreateFamily = ({ close }: ModalCreateFamilyProps) => {
+export const ModalCreate = ({ close }: ModalCreateProps) => {
   const queryClient = useQueryClient();
 
   const {

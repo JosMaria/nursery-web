@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ButtonRed, ButtonText, Title } from '@nursery/styles';
 import { Sending } from '@nursery/components';
-import { deleteFamilyByID } from '../services';
+import { deleteFamilyByID } from '../../services';
 
-type ModalDeleteFamilyProps = {
+type ModalDeleteProps = {
   familySelected: { id: string, name: string };
   close: () => void;
 }
 
-export const ModalDeleteFamily = ({ familySelected, close }: ModalDeleteFamilyProps) => {
+export const ModalDelete = ({ familySelected, close }: ModalDeleteProps) => {
   const queryClient = useQueryClient();
 
   const { mutate: deleteFamilyByIDMutate, isPending } = useMutation({
