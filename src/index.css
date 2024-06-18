@@ -19,4 +19,8 @@
   .input {
     @apply bg-nursery-light border-2 border-transparent focus:outline-none focus:border-nursery-dark;
   }
+
+  .navbar {
+    @apply hover:bg-nursery-dark-hover focus:outline-none focus:bg-nursery-dark-hover active:opacity-85;
+  }
 }
