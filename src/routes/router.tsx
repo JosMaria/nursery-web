@@ -8,6 +8,7 @@ export const router = createBrowserRouter(
       <Route index element={<>pagina para el catalogo</>}></Route>
       <Route path='repertory' element={<>Pagina para listado</>}></Route>
       <Route path='news' element={<FamilyPage />}></Route>
+      <Route path='login' element={<>Pagina para el login</>}></Route>
     </Route>
   )
 );
