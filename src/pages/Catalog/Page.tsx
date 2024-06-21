@@ -1,5 +1,5 @@
 import { StatusType } from '@nursery/types/commons';
-import { traduceStatus } from '@nursery/utils';
+import { Card } from './components';
 
 type CardType = {
   id: string;
@@ -68,15 +68,16 @@ export const CatalogPage = () => {
   return (
     <section className='flex flex-wrap justify-evenly gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 p-1'>
       {PLANTS.map(plant => (
-        <article className='w-56 sm:w-60 md:w-72 xl:w-80 p-1 bg-[#abc994] leading-tight shadow hover:shadow-md hover:shadow-black shadow-black' key={plant.id}>
-          <img className='h-40 sm:h-44 md:h-52 xl:h-60 w-full' src={plant.photoUrl} alt={plant.commonName} />
-          <div className='flex flex-col p-1 h-fit'>
-            <p className='self-center font-semibold text-base md:text-lg xl:text-xl first-letter:capitalize'>{plant.commonName}</p>
-            <p className='text-xs md:text-sm italic first-letter:capitalize font-medium'>{plant.scientificName} <span className='capitalize'>{plant.scientistLastnameInitial}</span></p>
-            <p className='text-xs md:text-sm italic first-letter:capitalize font-medium'>{plant.family}</p>
-            <p className='self-end text-xs font-medium bg-green-200 border rounded-full border-green-700 w-fit px-2'>{traduceStatus(plant.status)}</p>
-          </div>
-        </article>
+        <Card
+          key={plant.id}
+          id={plant.id}
+          commonName={plant.commonName}
+          scientificName={plant.scientificName}
+          scientistLastnameInitial={plant.scientistLastnameInitial ?? ''}
+          family={plant.family}
+          status={plant.status}
+          photoUrl={plant.photoUrl}
+        />
       ))}
     </section>
   );
