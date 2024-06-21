@@ -24,6 +24,8 @@
     "paths": {
       "@nursery/components": ["src/components"],
       "@nursery/styles": ["src/styles"],
+      "@nursery/types/*": ["src/types/*"],
+      "@nursery/utils": ["src/utils"],
     }
   },
   "include": ["src"],

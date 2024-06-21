@@ -8,6 +8,8 @@ export default defineConfig({
     alias: {
       '@nursery/components': path.resolve(__dirname, './src/components'),
       '@nursery/styles': path.resolve(__dirname, './src/styles'),
+      '@nursery/types': path.resolve(__dirname, './src/types'),
+      '@nursery/utils': path.resolve(__dirname, './src/utils'),
     }
   },
   plugins: [react()],
