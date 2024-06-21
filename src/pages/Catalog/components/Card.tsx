@@ -39,6 +39,19 @@ const Heading = styled.h2`
   };
 `;
 
+const StatusParagraph = styled.p`
+  background-color: rgb(231 229 228);
+  border-color: rgb(120 113 108);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  border-width: 2px;
+  border-radius: 9999px;
+  width: fit-content;
+  padding: 0 0.5rem;
+  letter-spacing: 0.025em;
+`;
+
 type CardProps = {
   id: string;
   commonName: string;
@@ -51,15 +64,15 @@ type CardProps = {
 
 export const Card = ({ commonName, scientificName, scientistLastnameInitial, family, status, photoUrl }: CardProps) => (
   <Link
-    className='w-56 sm:w-60 md:w-72 xl:w-80 p-1 bg-[#abc994] shadow hover:shadow-md shadow-black hover:shadow-black focus:outline-none focus:shadow-md focus:shadow-black active:opacity-90'
+    className='w-56 sm:w-60 md:w-72 xl:w-80 p-1 bg-[#ccd5ae] shadow hover:shadow-md shadow-black hover:shadow-black focus:outline-none focus:shadow-md focus:shadow-black active:opacity-90'
     to='#'
   >
     <img className='h-40 sm:h-44 md:h-52 xl:h-60 w-full' src={photoUrl} alt={commonName} />
-    <div className='flex flex-col p-1'>
+    <div className='flex flex-col p-1 select-none'>
       <Heading>{commonName}</Heading>
       <CurvedParagraph>{scientificName} <span className='capitalize'>{scientistLastnameInitial}</span></CurvedParagraph>
       <CurvedParagraph>{family}</CurvedParagraph>
-      <p className='self-end text-xs bg-green-200 border border-green-700 rounded-full w-fit px-2'>{traduceStatus(status)}</p>
+      <StatusParagraph className='self-end'>{traduceStatus(status)}</StatusParagraph>
     </div>
   </Link>
 );
