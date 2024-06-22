@@ -26,6 +26,7 @@
       "@nursery/styles": ["src/styles"],
       "@nursery/types/*": ["src/types/*"],
       "@nursery/utils": ["src/utils"],
+      "@nursery/constants/*": ["src/constants/*"],
     }
   },
   "include": ["src"],

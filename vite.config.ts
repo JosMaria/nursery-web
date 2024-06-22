@@ -10,6 +10,7 @@ export default defineConfig({
       '@nursery/styles': path.resolve(__dirname, './src/styles'),
       '@nursery/types': path.resolve(__dirname, './src/types'),
       '@nursery/utils': path.resolve(__dirname, './src/utils'),
+      '@nursery/constants': path.resolve(__dirname, './src/constants'),
     }
   },
   plugins: [react()],
