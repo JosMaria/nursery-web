@@ -1,5 +1,5 @@
 import { StatusType } from '@nursery/types/commons';
-import { Card, Navbar } from './components';
+import { Card, Navbar, Pagination } from './components';
 
 type CardType = {
   id: string;
@@ -66,9 +66,9 @@ const PLANTS: CardType[] = [
 
 export const CatalogPage = () => {
   return (
-    <div className=''>
+    <div className='flex flex-col items-center gap-1 p-1'>
       <Navbar />
-      <section className='flex flex-wrap justify-evenly gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 p-1'>
+      <section className='flex-1 flex flex-wrap justify-evenly gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12'>
         {PLANTS.map(plant => (
           <Card
             key={plant.id}
@@ -82,6 +82,7 @@ export const CatalogPage = () => {
           />
         ))}
       </section>
+      <Pagination />
     </div>
 
   );

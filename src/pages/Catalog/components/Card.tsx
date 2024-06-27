@@ -68,7 +68,7 @@ export const Card = ({ commonName, scientificName, scientistLastnameInitial, fam
     to='#'
   >
     <img className='h-40 sm:h-44 md:h-52 xl:h-60 w-full' src={photoUrl} alt={commonName} />
-    <div className='flex flex-col p-1 select-none'>
+    <div className='flex flex-col px-1 select-none'>
       <Heading>{commonName}</Heading>
       <CurvedParagraph>{scientificName} <span className='capitalize'>{scientistLastnameInitial}</span></CurvedParagraph>
       <CurvedParagraph>{family}</CurvedParagraph>
