@@ -33,8 +33,165 @@ const ITEMS: ItemType[] = [
     family: "Lamiaceae"
   },
   {
+    commonName: "Alamo",
+    scientificName: "Populus x canadensis moench",
+    family: "Salicaceae"
+  },
+  {
+    commonName: "Aloe",
+    scientificName: "Aloe barbadensis var. chinensis",
+    family: "Asphodelaceae"
+  },
+  {
+    commonName: "Amarilis",
+    scientificName: "Hippeastrum spp",
+    family: "Amaryllidaceae"
+  },
+  {
+    commonName: "Amor de hombre",
+    scientificName: "Trasdecantia pallida",
+    family: "Commelinaceae"
+  },
+  {
+    commonName: "Anturio",
+    scientificName: "Anthurium andreanum",
+    family: "Araceae"
+  },
+  {
+    commonName: "Anturio gigante",
+    scientificName: "Anthurium andreanum",
+    family: "Araceae"
+  },
+  {
+    commonName: "Aspidastra",
+    scientificName: "Aspidiastra elatior",
+    family: "Ruscaceae"
+  },
+  {
     commonName: "Begonia cebra"
   },
+  {
+    commonName: "Begonia rex",
+    scientificName: "Begonia rex",
+    family: "Begoniaceae"
+  },
+  {
+    commonName: "Begonias tuberosa",
+    scientificName: "Begonia x tuberhybrida",
+    family: "Begoniaceae"
+  },
+  {
+    commonName: "Bingo de oro",
+    scientificName: "Duranta erecta",
+    family: "Verbenaceae"
+  },
+  {
+    commonName: "Bouquet de novia",
+    scientificName: "Plumeria rubra L",
+    family: "apocynaceae"
+  },
+  {
+    commonName: "Brachichito",
+    scientificName: "Brachychiton populneus",
+    family: "Malvaceae"
+  },
+  {
+    commonName: "Bromelia",
+    scientificName: "Bromelia adams",
+    family: "Bromeliaceae"
+  },
+  {
+    commonName: "Buganvilla",
+    scientificName: "Boungainvillea spectabilis willd",
+    family: "Nyctaginaceae"
+  },
+  {
+    commonName: "Cactu san pedro",
+    scientificName: "Echinopsis pachanoi",
+    family: "Cactaceae"
+  },
+  {
+    commonName: "Cactu cola de rata",
+    family: "Cactaceae"
+  },
+  {
+    commonName: "Cactu estrella de mar",
+    scientificName: "Orbea variegata",
+    family: "Apocynaceae"
+  },
+  {
+    commonName: "Cactu flor de mayo",
+    scientificName: "Schlumbergera truncata",
+    family: "Cactaceae"
+  },
+  {
+    commonName: "Cactu leopardo"
+  },
+  {
+    commonName: "Cactu mamilaria",
+    scientificName: "Mammillaria spinosissima",
+    family: "Cactaceae"
+  },
+  {
+    commonName: "Cactu nopal",
+    scientificName: "Opuntia ficus indica",
+    family: "Cactaceae"
+  },
+  {
+    commonName: "Cactu serrucho"
+  },
+  {
+    commonName: "Cactus variados"
+  },
+  {
+    commonName: "Café",
+    scientificName: "Coffea arabica",
+    family: "Rubiaceae"
+  },
+  {
+    commonName: "Cala"
+  },
+  {
+    commonName: "Calatea larga",
+    scientificName: "Ctenanthe amabilis",
+    family: "Marantaceae"
+  },
+  {
+    commonName: "Calatea zebrina",
+    scientificName: "Calathea zebrina",
+    family: "Marantaceae"
+  },
+  {
+    commonName: "Canela aspidiasta"
+  },
+  {
+    commonName: "Cebollin"
+  },
+  {
+    commonName: "Chacatea",
+    scientificName: "Dodonaea viscosa",
+    family: "Sapindaceae"
+  },
+  {
+    commonName: "Chefléra",
+    scientificName: "Schefflera arboricola",
+    family: "Araliaceae"
+  },
+  {
+    commonName: "Chilijchi ceibo",
+    scientificName: "Erythrina falcata",
+    family: "Fabaceae"
+  },
+  {
+    commonName: "Chirimoya",
+    scientificName: "Annona cherimola mill",
+    family: "Annonaceae"
+  },
+  {
+    commonName: "Cidra",
+    scientificName: "Citrus medica",
+    family: "Rutaceae"
+  }
 ];
 
 export const RepertoryPage = () => {
@@ -59,9 +216,9 @@ export const RepertoryPage = () => {
             </button>
           </div>
         </div>
-        <article className='max-sm:overflow-x-scroll'>
+        <article className='overflow-x-auto h-screen overflow-y-auto'>
           <table className='min-w-[28rem] w-full whitespace-nowrap'>
-            <thead className='bg-nursery-dark text-nursery-light whitespace-nowrap text-sm max-sm:text-xs'>
+            <thead className='sticky top-0 bg-nursery-dark text-nursery-light whitespace-nowrap text-sm max-sm:text-xs'>
               <tr className='tracking-wide'>
                 <th className='py-2'>N°</th>
                 <th className='py-2'>Nombre Com&uacute;n</th>
