@@ -1,8 +1,18 @@
-type TableProps = {
+type ItemListProps = {
   items: AnswerItemType[];
 };
 
-export const Table = ({ items }: TableProps) => (
+export const ItemList = ({ items }: ItemListProps) => (
+  <>
+    {items.length !== 0 ? <Table items={items} /> : (
+      <p className='max-sm:text-sm w-full text-center font-medium p-2 sm:p-3 bg-nursery-medium border-2 border-nursery-dark'>
+        Actualmente no tenemos ejemplares de plantas para mostrar en este momento. Por favor, vuelve a intentarlo m&aacute;s tarde.
+      </p>
+    )}
+  </>
+);
+
+const Table = ({ items }: ItemListProps) => (
   <article className='overflow-x-auto h-screen overflow-y-auto'>
     <table className='min-w-[28rem] w-full whitespace-nowrap'>
       <thead className='sticky top-0 bg-nursery-dark text-nursery-light whitespace-nowrap text-sm max-sm:text-xs'>
@@ -26,4 +36,3 @@ export const Table = ({ items }: TableProps) => (
     </table>
   </article>
 );
-
