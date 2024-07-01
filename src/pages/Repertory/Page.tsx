@@ -14,48 +14,19 @@ export const RepertoryPage = () => {
 
   if (isPaused) return <Paused />;
 
-  if (status === 'pending') {
-    return (
-      <section className='flex justify-center m-2'>
-        <Loader />
-      </section>
-    )
-  }
-
-  if (status === 'success') {
-    return (
-      <div className='flex justify-center p-1'>
-        <section className='flex flex-col gap-2 max-w-xl w-full'>
+  return (
+    <div className='flex justify-center m-2'>
+      {status === 'pending' && <Loader />}
+      {status === 'success' && (
+        <section className='flex flex-col gap-2 max-w-2xl w-full'>
           <div className='flex flex-wrap justify-between'>
             <Title>Listado</Title>
-            <Searcher />
+            <Searcher isEnabled={itemsFetched.length > 0} />
           </div>
           <ItemList items={itemsFetched} />
         </section>
-      </div>
-    );
-  }
-
-  if (status === 'error') {
-    return <p>hubo un error</p>
-  }
+      )}
+      {status === 'error' && (<p>hubo un error</p>)}
+    </div>
+  );
 }
-
-/**
- * 
- * if (status === 'pending') {
-    return <p className='bg-blue-300 p-2 m-2'>Esta en estado <b>pending</b></p>
-  } else if (status === 'success') {
-    return <p>{JSON.stringify(data, null, 4)}</p>
-  } else if (status === 'error') {
-    return <p>hubo un error</p>
-  }
-
-  if (fetchStatus === 'fetching') {
-    return <p className='bg-green-600 p-2 m-2'>Esta en fetchStatus <b>fetching</b></p>;
-  } else if (fetchStatus === 'paused') {
-    return <p className='bg-green-600 p-2 m-2'>Esta en fetchStatus <b>paused</b></p>;
-  } else if (fetchStatus === 'idle') {
-    return <p className='bg-green-600 p-2 m-2'>Esta en fetchStatus <b>IDLE</b></p>;
-  }
- */

@@ -1,6 +1,10 @@
 import { ButtonRed, InputText } from '@nursery/styles';
 
-export const Searcher = () => (
+type SearcherProps = {
+  isEnabled: boolean;
+};
+
+export const Searcher = ({ isEnabled }: SearcherProps) => (
   <div className='flex gap-1'>
     <InputText
       className='input border-nursery-dark max-sm:w-40'
@@ -10,6 +14,7 @@ export const Searcher = () => (
     <button
       className='button rounded'
       title='Buscar'
+      disabled={!isEnabled}
       onClick={() => console.log('hacer click en buscar')}
     >
       <svg className='h-7 w-7 text-nursery-light p-1' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
@@ -18,12 +23,13 @@ export const Searcher = () => (
     </button>
     <ButtonRed
       className='rounded'
-      title='Imprimir'
-      onClick={() => console.log('hiciste click en Imprimir')}
+      title='Borrar'
+      disabled={!isEnabled}
+      onClick={() => console.log('hiciste click en Borrar')}
     >
-      <svg className='h-7 w-7 p-1' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2'  strokeLinecap='round' strokeLinejoin='round'>  
-        <path d='M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z' />  
-        <line x1='18' y1='9' x2='12' y2='15' />  
+      <svg className='h-7 w-7 p-1' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+        <path d='M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z' />
+        <line x1='18' y1='9' x2='12' y2='15' />
         <line x1='12' y1='9' x2='18' y2='15' />
       </svg>
     </ButtonRed>
