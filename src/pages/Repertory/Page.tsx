@@ -1,6 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-import { Content, Paused } from './components';
 import { Loader } from '@nursery/components';
+import { useQuery } from '@tanstack/react-query';
+
+import { Content, Paused } from './components';
 import { fetchAllItems } from './service';
 
 export const RepertoryPage = () => {

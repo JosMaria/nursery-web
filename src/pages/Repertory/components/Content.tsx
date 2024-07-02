@@ -1,12 +1,14 @@
-import { useSearchParams } from 'react-router-dom';
-import { Title } from '@nursery/styles';
-import { Searcher } from './Searcher';
-import { ItemList } from './ItemList';
 import { useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+import { Title } from '@nursery/styles';
+
+import { ItemList } from './ItemList';
+import { Searcher } from './Searcher';
 
 type ContentProps = {
   itemsObtained: AnswerItemType[]
-}
+};
 
 export const Content = ({ itemsObtained }: ContentProps) => {
   const [searchParams, setSearchParams] = useSearchParams({ q: '' });
@@ -16,13 +18,15 @@ export const Content = ({ itemsObtained }: ContentProps) => {
 
   const handleSearcher = (action: SearcherActionType) => {
     if (inputRef.current) {
-      if (action === 'search') {
-        setSearchParams({ q: inputRef.current.value });
+      let valueToSearch = '';
       
-      } else if (action === 'clean') {
-        inputRef.current.value = '';
-        setSearchParams({ q: '' });
+      if (action === 'clean') {
+        inputRef.current.value = valueToSearch;
+      
+      } else if (action === 'search') {
+        valueToSearch = inputRef.current.value;
       }
+      setSearchParams({ q: valueToSearch }, { replace: true });
     }
   };
 
