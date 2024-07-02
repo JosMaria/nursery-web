@@ -19,11 +19,11 @@ const Table = ({ itemsObtained, textToFilter }: ItemListProps) => {
   return (
     <>
       {itemsFiltered.length === 0 ? (
-        <p className='max-sm:text-sm w-full text-center font-medium p-2 sm:p-3 bg-nursery-medium border-2 border-nursery-dark'>
+        <p className='max-sm:text-sm w-full text-center p-2 sm:p-3 bg-nursery-medium border-2 border-nursery-dark'>
           No se encontro ninguna planta con el filtro <b>{textToFilter}</b>
         </p>
       ) : (
-        <article className='overflow-x-auto h-screen overflow-y-auto'>
+        <article className='overflow-x-auto max-h-svh overflow-y-auto'>
           <table className='min-w-[28rem] w-full whitespace-nowrap'>
             <thead className='sticky top-0 bg-nursery-dark text-nursery-light whitespace-nowrap text-sm max-sm:text-xs'>
               <tr className='tracking-wide'>
