@@ -3,3 +3,5 @@ type AnswerItemType = {
   scientificName?: string;
   family?: string;
 };
+
+type SearcherActionType = 'search' | 'clean';
