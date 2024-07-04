@@ -2,8 +2,11 @@ import { useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Title } from '@nursery/styles';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
+import { ButtonDownloadPDF } from './ButtonDownloadPDF';
 import { ItemList } from './ItemList';
+import { ItemListPDF } from './ItemListPDF';
 import { Searcher } from './Searcher';
 
 type ContentProps = {
@@ -19,10 +22,10 @@ export const Content = ({ itemsObtained }: ContentProps) => {
   const handleSearcher = (action: SearcherActionType) => {
     if (inputRef.current) {
       let valueToSearch = '';
-      
+
       if (action === 'clean') {
         inputRef.current.value = valueToSearch;
-      
+
       } else if (action === 'search') {
         valueToSearch = inputRef.current.value;
       }
@@ -35,18 +38,9 @@ export const Content = ({ itemsObtained }: ContentProps) => {
       <div className='flex flex-col gap-1'>
         <div className='flex justify-between items-center'>
           <Title className='text-center'>Listado</Title>
-          <button
-            className='button rounded'
-            title='Imprimir'
-            onClick={() => console.log('size', itemsFiltered.length)}
-          >
-            <svg className='h-7 w-7 p-1 text-nursery-light' width='24' height='24' viewBox='0 0 24 24' strokeWidth='2' stroke='currentColor' fill='none' strokeLinecap='round' strokeLinejoin='round'>
-              <path stroke='none' d='M0 0h24v24H0z' />
-              <path d='M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2' />
-              <path d='M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4' />
-              <rect x='7' y='13' width='10' height='8' rx='2' />
-            </svg>
-          </button>
+          <PDFDownloadLink document={<ItemListPDF />} fileName='Listado de Plantas.pdf'>
+            {({ loading }) => loading ? <ButtonDownloadPDF isEnabled={false} /> : <ButtonDownloadPDF isEnabled />}
+          </PDFDownloadLink>
         </div>
         <Searcher
           isEnabled={itemsObtained.length > 0}
