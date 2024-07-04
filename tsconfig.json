@@ -27,6 +27,7 @@
       "@nursery/types/*": ["src/types/*"],
       "@nursery/utils": ["src/utils"],
       "@nursery/constants/*": ["src/constants/*"],
+      "@nursery/config/*": ["src/config/*"],
     }
   },
   "include": ["src"],

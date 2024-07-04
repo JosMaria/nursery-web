@@ -34,17 +34,17 @@ export const ButtonYellow = styled.button`
 `;
 
 export const ButtonRed = styled.button`
-  background-color: rgb(239 68 68 / 1);
+  background-color: rgb(220 38 38 / 1);
   color: rgb(254 242 242 / 1);
 
   &:hover {
-    background-color: rgb(220 38 38 / 1);
+    background-color: rgb(185 28 28 / 1);
   }
 
   &:focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
-    background-color: rgb(220 38 38 / 1);
+    background-color: rgb(185 28 28 / 1);
     box-shadow: 1px 1px #888;
   }
 
