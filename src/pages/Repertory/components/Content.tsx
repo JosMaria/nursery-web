@@ -35,7 +35,7 @@ export const Content = ({ itemsObtained }: ContentProps) => {
 
   return (
     <section className='flex flex-col gap-1 max-w-3xl w-full'>
-      <div className='flex flex-col gap-1'>
+      <div className='flex flex-col'>
         <div className='flex justify-between items-start'>
           <Title className='text-center'>Listado</Title>
           <PDFDownloadLink document={<ItemListPDF itemsFiltered={itemsFiltered} />} fileName='Listado de Plantas.pdf'>

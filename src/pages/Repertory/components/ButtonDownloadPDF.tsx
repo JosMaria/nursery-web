@@ -4,12 +4,13 @@ type ButtonDownloadPDFProps = {
 
 export const ButtonDownloadPDF = ({ isEnabled }: ButtonDownloadPDFProps) => (
   <button className='button rounded' title='Descargar PDF' disabled={!isEnabled}>
-    <svg className='h-7 w-7 p-0.5 text-nursery-light' width='24' height='24' viewBox='0 0 24 24' strokeWidth='2' stroke='currentColor' fill='none' strokeLinecap='round' strokeLinejoin='round'>
-      <path stroke='none' d='M0 0h24v24H0z' />
-      <path d='M14 3v4a1 1 0 0 0 1 1h4' />
-      <path d='M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z' />
-      <line x1='12' y1='11' x2='12' y2='17' />
-      <polyline points='9 14 12 17 15 14' />
+    <svg className='h-7 w-7 p-0.5 text-nursery-light' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+      <path 
+        strokeLinecap='round' 
+        strokeLinejoin='round' 
+        strokeWidth='2' 
+        d='M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' 
+      />
     </svg>
   </button>
 );
