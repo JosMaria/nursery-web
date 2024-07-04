@@ -1,15 +1,4 @@
-import { StatusType } from '@nursery/types/commons';
 import { Card, Navbar, Pagination } from './components';
-
-type CardType = {
-  id: string;
-  commonName: string;
-  scientificName: string;
-  scientistLastnameInitial?: string;
-  family: string;
-  status: StatusType;
-  photoUrl: string;
-};
 
 const PLANTS: CardType[] = [
   {
@@ -74,16 +63,15 @@ export const CatalogPage = () => {
             key={plant.id}
             id={plant.id}
             commonName={plant.commonName}
-            scientificName={plant.scientificName}
+            scientificName={plant.scientificName ?? ''}
             scientistLastnameInitial={plant.scientistLastnameInitial ?? ''}
-            family={plant.family}
+            family={plant.family ?? ''}
             status={plant.status}
-            photoUrl={plant.photoUrl}
+            photoUrl={plant.photoUrl ?? ''}
           />
         ))}
       </section>
       <Pagination />
     </div>
-
   );
 };
