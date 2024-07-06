@@ -1,7 +1,8 @@
-import { StatusType } from '@nursery/types/commons';
-import { traduceStatus } from '@nursery/utils';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { StatusType } from '@nursery/types/commons';
+import { traduceStatus } from '@nursery/utils';
 
 const CurvedParagraph = styled.i`
   font-size: 0.75rem;
@@ -56,13 +57,12 @@ type CardProps = {
   id: string;
   commonName: string;
   scientificName: string;
-  scientistLastnameInitial: string;
   family: string;
   photoUrl: string;
   status: StatusType;
 };
 
-export const Card = ({ commonName, scientificName, scientistLastnameInitial, family, status, photoUrl }: CardProps) => (
+export const Card = ({ commonName, scientificName, family, status, photoUrl }: CardProps) => (
   <Link
     className='w-56 sm:w-60 md:w-72 xl:w-80 p-1 bg-[#ccd5ae] shadow hover:shadow-md shadow-black hover:shadow-black focus:outline-none focus:shadow-md focus:shadow-black active:opacity-90'
     to='#'
@@ -70,7 +70,7 @@ export const Card = ({ commonName, scientificName, scientistLastnameInitial, fam
     <img className='h-40 sm:h-44 md:h-52 xl:h-60 w-full' src={photoUrl} alt={commonName} />
     <div className='flex flex-col px-1 select-none'>
       <Heading>{commonName}</Heading>
-      <CurvedParagraph>{scientificName} <span className='capitalize'>{scientistLastnameInitial}</span></CurvedParagraph>
+      <CurvedParagraph>{scientificName}</CurvedParagraph>
       <CurvedParagraph>{family}</CurvedParagraph>
       <StatusParagraph className='self-end'>{traduceStatus(status)}</StatusParagraph>
     </div>
