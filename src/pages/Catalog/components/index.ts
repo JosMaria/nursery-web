@@ -1,3 +1,1 @@
-export * from './Card';
-export * from './Navbar';
-export * from './Pagination';
+export * from './Content';
