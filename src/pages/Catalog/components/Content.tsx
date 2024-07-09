@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { SetURLSearchParams } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -9,26 +10,29 @@ import { Pagination } from './Pagination';
 
 type ContentProps = {
   pageContent: PageType;
-  page: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
+  numberPage: number;
+  setNumberPage: SetURLSearchParams;
   isPlaceholderData: boolean;
 };
 
-export const Content = ({ pageContent, page, setPage, isPlaceholderData }: ContentProps) => {
+export const Content = ({ pageContent, numberPage, setNumberPage, isPlaceholderData }: ContentProps) => {
   const queryClient = useQueryClient();
 
   const updatePage = (move: 'first' | 'previous' | 'next' | 'last') => {
     if (move === 'first') {
-      setPage(0);
+      setNumberPage({ page: '0' });
 
     } else if (move === 'previous') {
-      setPage((oldPage) => Math.max(oldPage - 1, 0));
+      const newPageNumber = Math.max(numberPage - 1, 0);
+      setNumberPage({ page: String(newPageNumber) });
 
     } else if (move === 'next') {
-      setPage(oldPage => pageContent.last ? oldPage : oldPage + 1);
+      const newPageNumber = pageContent.last ? numberPage : numberPage + 1;
+      setNumberPage({ page: String(newPageNumber) });
 
     } else if (move === 'last') {
-      setPage(pageContent.totalPages - 1);
+      const newPageNumber = pageContent.totalPages - 1;
+      setNumberPage({ page: String(newPageNumber) });
 
     } else {
       throw new Error("Options 'previous' or 'next' have been not selected.");
@@ -38,11 +42,11 @@ export const Content = ({ pageContent, page, setPage, isPlaceholderData }: Conte
   useEffect(() => {
     if (!isPlaceholderData && !pageContent.last) {
       queryClient.prefetchQuery({
-        queryKey: ['cards', page + 1],
-        queryFn: () => fetchPlantCards(page + 1),
+        queryKey: ['cards', numberPage + 1],
+        queryFn: () => fetchPlantCards(numberPage + 1),
       });
     }
-  }, [pageContent, isPlaceholderData, page, queryClient]);
+  }, [pageContent, isPlaceholderData, numberPage, queryClient]);
 
   return (
     <div className='flex flex-col items-center gap-1 p-1'>
@@ -53,8 +57,8 @@ export const Content = ({ pageContent, page, setPage, isPlaceholderData }: Conte
             key={plant.id}
             id={plant.id}
             commonName={plant.commonName}
-            scientificName={plant.scientificName ?? ' '}
-            family={plant.family ?? ' '}
+            scientificName={plant.scientificName ?? ''}
+            family={plant.family ?? ''}
             status={plant.status}
             photoUrl={plant.photoUrl ?? ''}
           />

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { Loader, Paused } from '@nursery/components';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
@@ -7,11 +7,12 @@ import { Content } from './components';
 import { fetchPlantCards } from './service';
 
 export const CatalogPage = () => {
-  const [page, setPage] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams({ page: '0' });
+  const numberPage = Number.parseInt(searchParams.get('page') ?? '0');
 
   const { data: pageObtained, status, isPaused, isPlaceholderData } = useQuery({
-    queryKey: ['cards', page],
-    queryFn: () => fetchPlantCards(page),
+    queryKey: ['cards', numberPage],
+    queryFn: () => fetchPlantCards(numberPage),
     placeholderData: keepPreviousData,
     staleTime: 5000,
   });
@@ -25,8 +26,8 @@ export const CatalogPage = () => {
       {status === 'success' && (
         <Content
           pageContent={pageObtained}
-          page={page}
-          setPage={setPage}
+          numberPage={numberPage}
+          setNumberPage={setSearchParams}
           isPlaceholderData={isPlaceholderData}
         />
       )}
