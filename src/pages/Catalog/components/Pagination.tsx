@@ -1,13 +1,17 @@
 type PaginationProps = {
   updatePage: (move: 'first' | 'previous' | 'next' | 'last') => void;
   numberPage: number;
+  isFirstPage: boolean;
+  isLastPage: boolean;
+  isPlaceholderData: boolean;
 };
 
-export const Pagination = ({ updatePage, numberPage }: PaginationProps) => (
+export const Pagination = ({ updatePage, numberPage, isFirstPage, isLastPage, isPlaceholderData }: PaginationProps) => (
   <footer className='flex items-center gap-3 sm:gap-5 font-bold m-2'>
     <button
-      className='button sm:p-0.5 rounded'
+      className={`button sm:p-0.5 rounded ${(isPlaceholderData || isFirstPage) && 'opacity-50'}`}
       onClick={() => updatePage('first')}
+      disabled={isPlaceholderData || isFirstPage}
     >
       <svg
         className='h-6 w-6 sm:h-7 sm:w-7 max-sm:p-0.5 text-nursery-light'
@@ -23,8 +27,9 @@ export const Pagination = ({ updatePage, numberPage }: PaginationProps) => (
       </svg>
     </button>
     <button
-      className='button sm:p-0.5 rounded'
+      className={`button sm:p-0.5 rounded ${(isPlaceholderData || isFirstPage) && 'opacity-50'}`}
       onClick={() => updatePage('previous')}
+      disabled={isPlaceholderData || isFirstPage}
     >
       <svg
         className='h-6 w-6 sm:h-7 sm:w-7 text-nursery-light p-0.5'
@@ -43,8 +48,9 @@ export const Pagination = ({ updatePage, numberPage }: PaginationProps) => (
     </button>
     <p className='font-medium max-sm:text-sm tracking-wide'>P&aacute;gina {numberPage + 1}</p>
     <button
-      className='button sm:p-0.5 rounded'
+      className={`button sm:p-0.5 rounded ${(isPlaceholderData || isLastPage) && 'opacity-50'}`}
       onClick={() => updatePage('next')}
+      disabled={isPlaceholderData || isLastPage}
     >
       <svg
         className='h-6 w-6 sm:h-7 sm:w-7 text-nursery-light p-0.5'
@@ -62,8 +68,9 @@ export const Pagination = ({ updatePage, numberPage }: PaginationProps) => (
       </svg>
     </button>
     <button
-      className='button sm:p-0.5 rounded'
+      className={`button sm:p-0.5 rounded ${(isPlaceholderData || isLastPage) && 'opacity-50'}`}
       onClick={() => updatePage('last')}
+      disabled={isPlaceholderData || isLastPage}
     >
       <svg
         className='h-6 w-6 sm:h-7 sm:w-7 max-sm:p-0.5 text-nursery-light'

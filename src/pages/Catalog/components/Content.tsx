@@ -1,13 +1,22 @@
+import { useEffect } from 'react';
+
+import { useQueryClient } from '@tanstack/react-query';
+
+import { fetchPlantCards } from '../service';
 import { Card } from './Card';
 import { Navbar } from './Navbar';
 import { Pagination } from './Pagination';
 
 type ContentProps = {
-  pageContent: PageType,
+  pageContent: PageType;
+  page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  isPlaceholderData: boolean;
 };
 
-export const Content = ({ pageContent, setPage }: ContentProps) => {
+export const Content = ({ pageContent, page, setPage, isPlaceholderData }: ContentProps) => {
+  const queryClient = useQueryClient();
+
   const updatePage = (move: 'first' | 'previous' | 'next' | 'last') => {
     if (move === 'first') {
       setPage(0);
@@ -26,6 +35,15 @@ export const Content = ({ pageContent, setPage }: ContentProps) => {
     }
   }
 
+  useEffect(() => {
+    if (!isPlaceholderData && !pageContent.last) {
+      queryClient.prefetchQuery({
+        queryKey: ['cards', page + 1],
+        queryFn: () => fetchPlantCards(page + 1),
+      });
+    }
+  }, [pageContent, isPlaceholderData, page, queryClient]);
+
   return (
     <div className='flex flex-col items-center gap-1 p-1'>
       <Navbar />
@@ -42,7 +60,13 @@ export const Content = ({ pageContent, setPage }: ContentProps) => {
           />
         ))}
       </section>
-      <Pagination updatePage={updatePage} numberPage={pageContent.number} />
+      <Pagination
+        updatePage={updatePage}
+        numberPage={pageContent.number}
+        isFirstPage={pageContent.first}
+        isLastPage={pageContent.last}
+        isPlaceholderData={isPlaceholderData}
+      />
     </div>
   );
 }

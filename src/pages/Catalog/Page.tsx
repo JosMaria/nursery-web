@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Loader, Paused } from '@nursery/components';
-import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 
 import { Content } from './components';
 import { fetchPlantCards } from './service';
 
 export const CatalogPage = () => {
-  const queryClient = useQueryClient();
   const [page, setPage] = useState(0);
 
   const { data: pageObtained, status, isPaused, isPlaceholderData } = useQuery({
@@ -16,17 +15,8 @@ export const CatalogPage = () => {
     placeholderData: keepPreviousData,
     staleTime: 5000,
   });
-  
-  if (isPaused) return <Paused />;
 
-  useEffect(() => {
-    if (!isPlaceholderData && !pageObtained?.last) {
-      queryClient.prefetchQuery({
-        queryKey: ['cards', page + 1],
-        queryFn: () => fetchPlantCards(page + 1),
-      });
-    }
-  }, [pageObtained, isPlaceholderData, page, queryClient]);
+  if (isPaused) return <Paused />;
 
   return (
     <div className='flex justify-center m-1'>
@@ -35,7 +25,9 @@ export const CatalogPage = () => {
       {status === 'success' && (
         <Content
           pageContent={pageObtained}
+          page={page}
           setPage={setPage}
+          isPlaceholderData={isPlaceholderData}
         />
       )}
     </div>
