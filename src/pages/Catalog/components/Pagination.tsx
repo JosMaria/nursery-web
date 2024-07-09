@@ -1,6 +1,14 @@
-export const Pagination = () => (
+type PaginationProps = {
+  updatePage: (move: 'first' | 'previous' | 'next' | 'last') => void;
+  numberPage: number;
+};
+
+export const Pagination = ({ updatePage, numberPage }: PaginationProps) => (
   <footer className='flex items-center gap-3 sm:gap-5 font-bold m-2'>
-    <button className='button sm:p-0.5 rounded'>
+    <button
+      className='button sm:p-0.5 rounded'
+      onClick={() => updatePage('first')}
+    >
       <svg
         className='h-6 w-6 sm:h-7 sm:w-7 max-sm:p-0.5 text-nursery-light'
         viewBox='0 0 24 24'
@@ -14,7 +22,10 @@ export const Pagination = () => (
         <polyline points='18 17 13 12 18 7' />
       </svg>
     </button>
-    <button className='button sm:p-0.5 rounded'>
+    <button
+      className='button sm:p-0.5 rounded'
+      onClick={() => updatePage('previous')}
+    >
       <svg
         className='h-6 w-6 sm:h-7 sm:w-7 text-nursery-light p-0.5'
         width='24'
@@ -30,8 +41,11 @@ export const Pagination = () => (
         <polyline points='15 6 9 12 15 18' />
       </svg>
     </button>
-    <p className='font-medium max-sm:text-sm tracking-wide'>P&aacute;gina 1</p>
-    <button className='button sm:p-0.5 rounded'>
+    <p className='font-medium max-sm:text-sm tracking-wide'>P&aacute;gina {numberPage + 1}</p>
+    <button
+      className='button sm:p-0.5 rounded'
+      onClick={() => updatePage('next')}
+    >
       <svg
         className='h-6 w-6 sm:h-7 sm:w-7 text-nursery-light p-0.5'
         width='24'
@@ -47,7 +61,10 @@ export const Pagination = () => (
         <polyline points='9 6 15 12 9 18' />
       </svg>
     </button>
-    <button className='button sm:p-0.5 rounded'>
+    <button
+      className='button sm:p-0.5 rounded'
+      onClick={() => updatePage('last')}
+    >
       <svg
         className='h-6 w-6 sm:h-7 sm:w-7 max-sm:p-0.5 text-nursery-light'
         viewBox='0 0 24 24'
