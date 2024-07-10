@@ -64,7 +64,7 @@ type CardProps = {
 
 export const Card = ({ commonName, scientificName, family, status, photoUrl }: CardProps) => (
   <Link
-    className='w-56 sm:w-60 md:w-72 xl:w-80 p-1 bg-[#ccd5ae] shadow hover:shadow-md shadow-black hover:shadow-black focus:outline-none focus:shadow-md focus:shadow-black active:opacity-90'
+    className='w-56 sm:w-60 md:w-72 xl:w-80 h-fit p-1 bg-[#ccd5ae] shadow hover:shadow-md shadow-black hover:shadow-black focus:outline-none focus:shadow-md focus:shadow-black active:opacity-90'
     to='#'
   >
     <img className='h-40 sm:h-44 md:h-52 xl:h-60 w-full' src={photoUrl} alt={commonName} />

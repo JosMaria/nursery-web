@@ -21,7 +21,7 @@ export const CatalogPage = () => {
   if (isPaused) return <Paused />;
 
   return (
-    <div className='flex justify-center m-1'>
+    <div className='w-full flex justify-center'>
       {status === 'pending' && <Loader />}
       {status === 'error' && (<p>hubo un error</p>)}
       {status === 'success' && (

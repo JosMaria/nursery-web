@@ -50,9 +50,9 @@ export const Content = ({ pageContent, numberPage, isPlaceholderData, classifica
   }, [pageContent, isPlaceholderData, numberPage, classification, queryClient]);
 
   return (
-    <div className='flex flex-col items-center gap-1 p-1'>
+    <div className='w-full flex flex-col items-center justify-between gap-1 p-1'>
       <Navbar classification={classification} setSearchParams={setSearchParams} />
-      <section className='flex-1 flex flex-wrap justify-evenly gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12'>
+      <section className='flex-1 flex flex-wrap justify-evenly gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 p-2'>
         {pageContent.content.map(plant => (
           <Card
             key={plant.id}
