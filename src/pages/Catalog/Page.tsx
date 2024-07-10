@@ -7,12 +7,13 @@ import { Content } from './components';
 import { fetchPlantCards } from './service';
 
 export const CatalogPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams({ page: '0' });
+  const [searchParams, setSearchParams] = useSearchParams({ page: '0', classification: '' });
   const numberPage = Number.parseInt(searchParams.get('page') ?? '0');
+  const classification = searchParams.get('classification') ?? '';
 
   const { data: pageObtained, status, isPaused, isPlaceholderData } = useQuery({
-    queryKey: ['cards', numberPage],
-    queryFn: () => fetchPlantCards(numberPage),
+    queryKey: ['cards', numberPage, classification],
+    queryFn: () => fetchPlantCards(numberPage, classification),
     placeholderData: keepPreviousData,
     staleTime: 5000,
   });
@@ -27,8 +28,9 @@ export const CatalogPage = () => {
         <Content
           pageContent={pageObtained}
           numberPage={numberPage}
-          setNumberPage={setSearchParams}
           isPlaceholderData={isPlaceholderData}
+          classification={classification}
+          setSearchParams={setSearchParams}
         />
       )}
     </div>
