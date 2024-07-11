@@ -6,6 +6,6 @@ export const fetchPlantCards = async (page = 0, classification: string) => {
     requestParams = `${requestParams}&classification=${classification}`;
   }
 
-  const { data } = await axiosInstance.get<PageType>(`catalog?page=${page}`);
+  const { data } = await axiosInstance.get<PageType>(`catalog?${requestParams}`);
   return data;
 };

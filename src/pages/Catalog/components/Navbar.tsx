@@ -19,6 +19,7 @@ export const Navbar = ({ classification: classificationSelected, setSearchParams
         key={index}
         onClick={() => setSearchParams(prev => {
           prev.set('classification', classification);
+          prev.set('page', '0');
           return prev;
         })}
       >
@@ -28,6 +29,7 @@ export const Navbar = ({ classification: classificationSelected, setSearchParams
       className={`border-nursery-dark ${!CLASSIFICATIONS.includes(classificationSelected as ClassificationType) ? 'bg-nursery-dark text-nursery-light' : 'bg-nursery-medium hover:bg-nursery-dark hover:text-nursery-light focus:bg-nursery-dark-hover focus:text-nursery-light active:opacity-90'}`}
       onClick={() => setSearchParams(prev => {
         prev.set('classification', '');
+        prev.set('page', '0');
         return prev;
       })}
     >
