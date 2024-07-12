@@ -12,7 +12,7 @@ type NavbarProps = {
 };
 
 export const Navbar = ({ classification: classificationSelected, setSearchParams }: NavbarProps) => (
-  <nav className='bg-nursery-light w-full sticky top-0 backdrop-blur-sm flex flex-wrap justify-evenly gap-1 select-none p-1'>
+  <nav className='z-10 bg-nursery-dark w-full sticky top-0 backdrop-blur-sm flex flex-wrap justify-evenly gap-1 select-none p-1'>
     {CLASSIFICATIONS.map((classification, index) => (
       <ButtonNavbar
         className={`border-nursery-dark ${classificationSelected === classification ? 'bg-nursery-dark text-nursery-light' : 'bg-nursery-medium hover:bg-nursery-dark hover:text-nursery-light focus:bg-nursery-dark-hover focus:text-nursery-light active:opacity-90'}`}

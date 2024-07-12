@@ -7,7 +7,7 @@ type PaginationProps = {
 };
 
 export const Pagination = ({ updatePage, numberPage, isFirstPage, isLastPage, isPlaceholderData }: PaginationProps) => (
-  <footer className='flex items-center gap-3 sm:gap-5 font-bold m-1 select-none'>
+  <footer className='flex items-center gap-3 sm:gap-5 font-bold m-2 select-none'>
     <button
       className={`button sm:p-0.5 rounded ${(isPlaceholderData || isFirstPage) && 'opacity-50'}`}
       onClick={() => updatePage('first')}
