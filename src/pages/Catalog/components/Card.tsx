@@ -64,12 +64,12 @@ type CardProps = {
 
 export const Card = ({ commonName, scientificName, status }: CardProps) => (
   <Link
-    className='max-w-md w-full flex flex-col gap-1 p-2 hover:text-emerald-900 hover:shadow-md hover:shadow-black'
+    className='max-w-md w-full flex flex-col p-2 hover:shadow-md hover:shadow-black focus:outline-none focus:shadow-md focus:shadow-black'
     to='#'
   >
     <div className='overflow-hidden w-full rounded-lg'>
       <img
-        className='transform transition-transform duration-300 hover:scale-105 h-52 md:h-72 xl:h-80'
+        className='h-52 md:h-72 xl:h-80'
         src={'https://media.gettyimages.com/id/1280154279/es/foto/dale-a-tu-hogar-una-buena-dosis-de-vegetaci%C3%B3n.jpg?s=612x612&w=0&k=20&c=8XgCKb18LL4zb4m19uila63AOD9jwsE8KTlSenQzPDc='}
         alt={commonName}
       />

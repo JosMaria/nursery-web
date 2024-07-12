@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
@@ -18,6 +18,7 @@ type ContentProps = {
 
 export const Content = ({ pageContent, numberPage, isPlaceholderData, classification, setSearchParams }: ContentProps) => {
   const queryClient = useQueryClient();
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   const updatePage = (move: 'first' | 'previous' | 'next' | 'last') => {
     if (move === 'first') {
