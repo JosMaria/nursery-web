@@ -9,7 +9,7 @@ import { useRef, useState } from 'react';
 import { ModalFilter } from './Modal';
 
 type NavbarProps = {
-  classification: string;
+  classification: string | null;
   setSearchParams: SetURLSearchParams;
 };
 

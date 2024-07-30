@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
 
 import { fetchPlantCards } from '../service';
+import { PageType } from '../type';
 import { Card } from './Card';
 import { Navbar } from './Navbar';
 import { Pagination } from './Pagination';
@@ -12,13 +13,36 @@ type ContentProps = {
   pageContent: PageType;
   numberPage: number;
   isPlaceholderData: boolean;
-  classification: string;
+  classification: string | null;
   setSearchParams: SetURLSearchParams;
 };
 
 export const Content = ({ pageContent, numberPage, isPlaceholderData, classification, setSearchParams }: ContentProps) => {
+  const isEmptyContent = pageContent.first && classification == null && pageContent.content.length === 0;
+  return isEmptyContent ? <EmptyContent /> :
+    <PlantCardPage
+      pageContent={pageContent}
+      numberPage={numberPage}
+      isPlaceholderData={isPlaceholderData}
+      classification={classification}
+      setSearchParams={setSearchParams}
+    />;
+};
+
+const EmptyContent = () => (
+  <section className='flex flex-col justify-start items-center m-1'>
+    <div className='flex flex-col gap-1 bg-nursery-medium border-2 border-nursery-dark w-full max-w-sm px-3 py-1'>
+      <h2 className='font-medium text-base sm:text-lg text-center'>No hay plantas registradas</h2>
+      <p className='text-sm text-justify'>
+        El vivero de FDRyT no se registro ninguna planta en esta plataforma por el momento,
+        una vez que tengan algun ejemplar sera mostrado en el catalogo
+      </p>
+    </div>
+  </section>
+);
+
+const PlantCardPage = ({ pageContent, numberPage, isPlaceholderData, classification, setSearchParams }: ContentProps) => {
   const queryClient = useQueryClient();
-  const modalRef = useRef<HTMLDialogElement>(null);
 
   const updatePage = (move: 'first' | 'previous' | 'next' | 'last') => {
     if (move === 'first') {
@@ -52,17 +76,16 @@ export const Content = ({ pageContent, numberPage, isPlaceholderData, classifica
 
   return (
     <div className='w-full flex flex-col items-center justify-between gap-1'>
-      <Navbar classification={classification} setSearchParams={setSearchParams} />
-      <section className='w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 justify-items-center gap-5 sm:gap-10 p-1'>
+      {/* <Navbar classification={classification} setSearchParams={setSearchParams} /> */}
+      <section className='flex flex-wrap gap-10 w-full p-2'>
         {pageContent.content.map(plant => (
           <Card
             key={plant.id}
-            id={plant.id}
+            plantId={plant.id}
             commonName={plant.commonName}
             scientificName={plant.scientificName}
-            family={plant.family ?? ''}
             status={plant.status}
-            photoUrl={plant.photoUrl ?? ''}
+            imageId={plant.imageId}
           />
         ))}
       </section>
@@ -75,4 +98,4 @@ export const Content = ({ pageContent, numberPage, isPlaceholderData, classifica
       />
     </div>
   );
-}
+};

@@ -7,9 +7,9 @@ import { Content } from './components';
 import { fetchPlantCards } from './service';
 
 export const CatalogPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams({ page: '0', classification: '' });
+  const [searchParams, setSearchParams] = useSearchParams({ page: '0' });
   const numberPage = Number.parseInt(searchParams.get('page') ?? '0');
-  const classification = searchParams.get('classification') ?? '';
+  const classification = searchParams.get('classification') ?? null;
 
   const { data: pageObtained, status, isPaused, isPlaceholderData } = useQuery({
     queryKey: ['cards', numberPage, classification],

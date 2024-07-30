@@ -1,10 +1,11 @@
+import { StatusType } from '@nursery/types/commons';
+
 type PlantCardType = {
-  id: string;
+  id: number;
   commonName: string;
   scientificName?: string;
-  family?: string;
   status: StatusType;
-  photoUrl?: string;
+  imageId?: string;
 };
 
 type PageType = {

@@ -1,8 +1,10 @@
 import { axiosInstance } from '@nursery/config/axios';
 
-export const fetchPlantCards = async (page = 0, classification: string) => {
+import { PageType } from './type';
+
+export const fetchPlantCards = async (page = 0, classification: string | null) => {
   let requestParams = `page=${page}`;
-  if (classification.length !== 0) {
+  if (classification) {
     requestParams = `${requestParams}&classification=${classification}`;
   }
 
