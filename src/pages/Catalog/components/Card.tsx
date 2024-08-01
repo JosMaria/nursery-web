@@ -29,7 +29,7 @@ type CardProps = {
 
 export const Card = ({ plantId, commonName, scientificName, status, imageId }: CardProps) => (
   <Link
-    className='bg-orange-100 max-w-sm w-full flex flex-col p-2 hover:shadow-md hover:shadow-black focus:outline-none focus:shadow-md focus:shadow-black'
+    className='bg-orange- max-w-sm w-full flex flex-col p-2 hover:shadow-md hover:shadow-black focus:outline-none focus:shadow-md focus:shadow-black'
     to='#'
   >
     <div className='overflow-hidden w-full rounded-lg'>

@@ -1,38 +1,81 @@
-import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
+import React, { FC, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-import { Loader, Paused } from '@nursery/components';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { Content } from './components';
-import { fetchPlantCards } from './service';
+const fetchTodos = async ({ pageParam = 1 }) => {
+  const response = await axios.get<TodoType[]>(`https://jsonplaceholder.typicode.com/posts?_page=${pageParam}&_limit=10`);
+  const totalCount = parseInt(response.headers['x-total-count'], 10);
+  const hasNextPage = pageParam * 10 < totalCount;
+
+  return {
+    data: response.data,
+    nextId: hasNextPage ? pageParam + 1 : undefined,
+  };
+}
 
 export const CatalogPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams({ page: '0' });
-  const numberPage = Number.parseInt(searchParams.get('page') ?? '0');
-  const classification = searchParams.get('classification') ?? null;
+  const [todos, setTodos] = useState<TodoType[]>([]);
 
-  const { data: pageObtained, status, isPaused, isPlaceholderData } = useQuery({
-    queryKey: ['cards', numberPage, classification],
-    queryFn: () => fetchPlantCards(numberPage, classification),
-    placeholderData: keepPreviousData,
-    staleTime: 5000,
+  const { ref, inView } = useInView();
+
+  const { data, status, error, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } = useInfiniteQuery({
+    queryKey: ['todos'],
+    queryFn: fetchTodos,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.nextId
   });
 
-  if (isPaused) return <Paused />;
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
+
+  if (status === 'pending') return <p>Loading...</p>
+  if (status === 'error') return <p>Error: {error.message}</p>
+
+  console.log(data);
+
+  const content = data.pages.map(({ data: todos }) => todos.map(todo => <TodoCard key={todo.id} todo={todo} />))
 
   return (
-    <div className='w-full flex justify-center'>
-      {status === 'pending' && <Loader />}
-      {status === 'error' && (<p>hubo un error</p>)}
-      {status === 'success' && (
-        <Content
-          pageContent={pageObtained}
-          numberPage={numberPage}
-          isPlaceholderData={isPlaceholderData}
-          classification={classification}
-          setSearchParams={setSearchParams}
-        />
-      )}
+    <div>
+      {content}
+      <div>
+        <button
+          ref={ref}
+          onClick={() => fetchNextPage()}
+          disabled={!hasNextPage || isFetchingNextPage}
+        >
+          {isFetchingNextPage
+            ? 'Loading more...'
+            : hasNextPage
+              ? 'Load Newer'
+              : 'Nothing more to load'}
+        </button>
+      </div>
+      <div>
+        {isFetching && !isFetchingNextPage ? 'Background Updating...' : null}
+      </div>
     </div>
   );
 };
+
+type TodoType = {
+  id: number;
+  title: string;
+}
+
+interface TodoCardProps extends React.HTMLAttributes<HTMLParagraphElement> {
+  todo: TodoType;
+};
+
+const TodoCard: FC<TodoCardProps> = ({ todo, ...props }) => {
+  return (
+    <p className='' key={todo.id} {...props}>
+      {todo.title}
+    </p>
+  );
+}
