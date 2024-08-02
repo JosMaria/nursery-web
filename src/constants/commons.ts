@@ -1,4 +1,4 @@
-import { ClassificationType } from '@nursery/types/commons';
+import { ClassificationType, StatusType } from '@nursery/types/commons';
 
 export const CLASSIFICATIONS: ClassificationType[] = [
   'FRUITFUL',
@@ -11,4 +11,10 @@ export const CLASSIFICATIONS: ClassificationType[] = [
   'SUCCULENT',
   'INDUSTRIAL',
   'FOREST',
+];
+
+export const STATES: StatusType[] = [
+  'AVAILABLE',
+  'NON_EXISTENT',
+  'PRESERVED'
 ];

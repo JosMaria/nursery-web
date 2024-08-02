@@ -25,17 +25,19 @@ type CardProps = {
   scientificName?: string;
   imageId?: string;
   status: StatusType;
+  imageUrl?: string;
 };
 
-export const Card = ({ plantId, commonName, scientificName, status, imageId }: CardProps) => (
+export const Card = ({ plantId, commonName, scientificName, status, imageUrl }: CardProps) => (
   <Link
-    className='bg-orange- max-w-sm w-full flex flex-col p-2 hover:shadow-md hover:shadow-black focus:outline-none focus:shadow-md focus:shadow-black'
+    className='w-96 flex flex-col gap-1 p-2 hover:shadow-md hover:shadow-black focus:outline-none focus:shadow-md focus:shadow-black rounded'
     to='#'
   >
-    <div className='overflow-hidden w-full rounded-lg'>
+    <div className='overflow-hidden w-full rounded'>
       <img
-        className='h-52 md:h-11 xl:h-80'
-        src={imageId ? `http://localhost:8080/api/v2/plants/${plantId}/image/${imageId}` : ImageNotFound}
+        className='h-72'
+        /*src={imageId ? `http://localhost:8080/api/v2/plants/${plantId}/image/${imageId}` : ImageNotFound}*/
+        src={imageUrl}
         alt={commonName}
       />
     </div>
