@@ -2,12 +2,8 @@ import { axiosInstance } from '@nursery/config/axios';
 
 import { PageType } from './type';
 
-export const fetchPlantCards = async (page = 0, classification: string | null) => {
-  let requestParams = `page=${page}`;
-  if (classification) {
-    requestParams = `${requestParams}&classification=${classification}`;
-  }
-
-  const { data } = await axiosInstance.get<PageType>(`catalog?${requestParams}`);
-  return data;
+export const fetchPlantCards = async ({ pageParam = 0 }) => {
+  const { data: page } = await axiosInstance.get<PageType>(`catalog?page=${pageParam}&size=4`);
+  const nextNumberPage = page.last ? undefined : page.number + 1;
+  return { page, nextNumberPage };
 };

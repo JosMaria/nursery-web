@@ -15,7 +15,7 @@ type PageType = {
 	empty: boolean;
   size: number;
 	numberOfElements: number;
-  number:number;
+  number: number;
   totalPages: number;
   totalElements: number;
 };
