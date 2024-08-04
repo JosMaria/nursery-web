@@ -1,8 +1,10 @@
+import { useForm } from 'react-hook-form';
+
+import { Requesting } from '@nursery/components';
 import { ButtonRed, ButtonText, InputText, TextFormValidation, Title } from '@nursery/styles';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { updateFamilyNameByID } from '../../services';
-import { Sending } from '@nursery/components';
-import { useForm } from 'react-hook-form';
 
 type ModalUpdateProps = {
   familySelected: { id: string, name: string };
@@ -64,7 +66,7 @@ export const ModalUpdate = ({ familySelected, close }: ModalUpdateProps) => {
               />
               <TextFormValidation>{errors.name?.message}</TextFormValidation>
             </fieldset>
-            {isPending ? <Sending /> : <ButtonText className='button' type='submit'>Cambiar</ButtonText>}
+            {isPending ? <Requesting /> : <ButtonText className='button' type='submit'>Cambiar</ButtonText>}
           </div>
         </section>
       </form>

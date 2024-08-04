@@ -1,7 +1,9 @@
-import { ButtonRed, ButtonText, TextFormValidation, Title, InputText } from '@nursery/styles';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { Sending } from '@nursery/components';
+
+import { Requesting } from '@nursery/components';
+import { ButtonRed, ButtonText, InputText, TextFormValidation, Title } from '@nursery/styles';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { postFamilies } from '../../services';
 
 type FormValuesType = {
@@ -92,7 +94,7 @@ export const ModalCreate = ({ close }: ModalCreateProps) => {
             +1 Familia
           </ButtonText>
         </section>
-        {isPending ? <Sending /> : <ButtonText className='button' type='submit'>Crear Familias</ButtonText>}
+        {isPending ? <Requesting /> : <ButtonText className='button' type='submit'>Crear Familias</ButtonText>}
       </form>
     </div >
   );

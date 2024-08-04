@@ -1,6 +1,7 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Requesting } from '@nursery/components';
 import { ButtonRed, ButtonText, Title } from '@nursery/styles';
-import { Sending } from '@nursery/components';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { deleteFamilyByID } from '../../services';
 
 type ModalDeleteProps = {
@@ -34,7 +35,7 @@ export const ModalDelete = ({ familySelected, close }: ModalDeleteProps) => {
         Al momento de eliminar la familia '<b>{familySelected.name}</b>'
         las plantas que fueron asignadas con esta familia se veran afectadas
       </p>
-      {isPending ? <Sending /> : (
+      {isPending ? <Requesting /> : (
         <ButtonText className='button self-center' onClick={() => deleteFamilyByIDMutate(familySelected.id)}>
           Si, Eliminar
         </ButtonText>
