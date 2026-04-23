@@ -1,0 +1,11 @@
+import { axiosInstance } from './api';
+
+import type { ImageSelectionResponse } from "./types";
+
+export const plantService = {
+	getImagesToSelection: async (plantId: number) => {
+		const uri = `/plants/${plantId}/images/selection`;
+		const { data } = await axiosInstance.get<ImageSelectionResponse[]>(uri);
+		return data;
+	},
+};
