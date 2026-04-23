@@ -8,4 +8,8 @@ export const plantService = {
 		const { data } = await axiosInstance.get<ImageSelectionResponse[]>(uri);
 		return data;
 	},
+	updateSelectedImage: async (plantId: number, imageId: number) => {
+		const { data: isChanged } = await axiosInstance.patch<Boolean>(`/plants/${plantId}/images/${imageId}`);
+		return isChanged;
+	},
 };
