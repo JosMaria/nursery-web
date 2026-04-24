@@ -1,0 +1,14 @@
+@use '@/styles/variables' as vars;
+
+.button {
+  background-color: vars.$color-darker;
+  color: vars.$color-lighter;
+  padding: 0.5rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 4;
+  cursor: pointer;
+
+  &.blocked {
+    cursor: not-allowed;
+  }
+}

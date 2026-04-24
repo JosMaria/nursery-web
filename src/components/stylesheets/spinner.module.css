@@ -1,0 +1,20 @@
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.circle {
+  fill: none;
+  stroke: green;
+  stroke-width: 4;
+  stroke-dasharray: 30 30;
+  stroke-linecap: round;
+}
