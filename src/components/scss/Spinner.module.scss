@@ -1,3 +1,5 @@
+@use '@/styles/variables' as vars;
+
 .spinner {
   animation: spin 1s linear infinite;
 }
@@ -13,7 +15,7 @@
 
 .circle {
   fill: none;
-  stroke: green;
+  stroke: vars.$color-darker;
   stroke-width: 4;
   stroke-dasharray: 30 30;
   stroke-linecap: round;

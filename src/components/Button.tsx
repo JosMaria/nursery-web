@@ -5,7 +5,7 @@ interface ButtonToSaveProps {
 	changeSelectedImage: () => void;
 };
 
-export const Button = ({ isEnabled, changeSelectedImage }: ButtonToSaveProps) => (
+const Button = ({ isEnabled, changeSelectedImage }: ButtonToSaveProps) => (
   <button
     className={`${styles.button} ${!isEnabled && styles.blocked}`}
     disabled={!isEnabled}
@@ -14,3 +14,5 @@ export const Button = ({ isEnabled, changeSelectedImage }: ButtonToSaveProps) =>
       Guardar
   </button>
 );
+
+export default Button;
