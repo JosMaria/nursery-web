@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Button, Spinner } from '@/components';
+import { Button, DotLoader } from '@/components';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { axiosInstance } from '../services/api';
@@ -57,28 +57,37 @@ export const ImagePage = () => {
 		}
 	}
 
-  if (isLoading) return <p>Cargando...</p>
   if (error) return <p>{error.message}</p>
 
   return (
-    <div style={{ padding: '0.5rem', backgroundColor: '#a3b18a', width: '34rem', display: 'flex', flexDirection: 'column', alignItems: 'center'  }}>
-      <section className={styles.sectionContainer}>
-        {plantImages.map(({ image_id: imageId }) => (
-          <ImageToSelect
-            key={imageId}
-            imageUrl={apiImageUrl(plantId, imageId)}
-            imageId={imageId}
-            isSelected={valuesImageId.currentValue === imageId}
-            changeSelectedImage={() => handleChangeSelectedImage(imageId)}
-          />
-        ))}
-      </section>
-      {isPending ? <Spinner /> : (
-        <Button
-          isEnabled={valuesImageId.initialValue !== valuesImageId.currentValue}
-          changeSelectedImage={() => mutate({ plantId, imageId: valuesImageId.currentValue })}
-        />
+    <main className={styles.imagePageContainer}>
+      {isLoading && (
+        <div className={styles.loaderContainer}>
+          <DotLoader size='medium' />
+          <i style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Cargando</i>
+        </div>
       )}
-    </div>
+      {isSuccess && (
+        <>
+          <section className={styles.sectionContainer}>
+            {plantImages.map(({ image_id: imageId }) => (
+              <ImageToSelect
+              key={imageId}
+              imageUrl={apiImageUrl(plantId, imageId)}
+              imageId={imageId}
+              isSelected={valuesImageId.currentValue === imageId}
+              changeSelectedImage={() => handleChangeSelectedImage(imageId)}
+              />
+            ))}
+          </section>
+          {isPending ? <DotLoader /> : (
+            <Button
+            isEnabled={valuesImageId.initialValue !== valuesImageId.currentValue}
+            changeSelectedImage={() => mutate({ plantId, imageId: valuesImageId.currentValue })}
+            />
+          )}
+        </>
+      )}
+    </main>
   );
 }

@@ -1,0 +1,53 @@
+@use '@/styles/variables' as vars;
+
+.dotLoaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem;
+}
+
+.dot {
+  background-color: vars.$color-darker;
+  border-radius: 50%;
+  animation: bounce 1.4s ease-in-out infinite;
+
+  &.dot1 {
+    animation-delay: -0.32s;
+  }
+
+  &.dot2 {
+    animation-delay: -0.16s;
+  }
+
+  &.dot3 {
+    animation-delay: 0s;
+  }
+
+  &.small {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  &.medium {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &.large {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0.75);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

@@ -1,6 +1,24 @@
+@use '@/styles/variables' as vars;
+
+.imagePageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  background-color: vars.$color-light;
+}
+
 .sectionContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 1rem;
+  width: 36rem;
+}
+
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
