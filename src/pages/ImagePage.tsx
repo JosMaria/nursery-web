@@ -21,7 +21,7 @@ const initialImageToSelect: ImageToSelect = {
 const apiImageUrl = (plantId: number, imageId: number) => `${axiosInstance.defaults.baseURL}/plants/${plantId}/images/${imageId}`;
 
 export const ImagePage = () => {
-  const plantId = 6;
+  const plantId = 3;
   const [valuesImageId, setValuesImageId] = useState(initialImageToSelect);
 
   const { data: plantImages, isLoading, error, isSuccess } = useQuery({
