@@ -1,3 +1,4 @@
+import type { AxiosProgressEvent } from 'axios';
 import { axiosInstance } from './api';
 
 import type { ImageSelectionResponse } from "./types";
@@ -12,15 +13,28 @@ export const plantService = {
 		const { data: isChanged } = await axiosInstance.patch<Boolean>(`/plants/${plantId}/images/${imageId}`);
 		return isChanged;
 	},
-	uploadPlantImage: async (plantId: number, isSelected: boolean,  formData: FormData) => {
+	uploadPlantImage: async ({ plantId, isSelected, formData, changePercentage }: ImageToUpload) => {
 		const uri = `/plants/${plantId}/images?selected=${isSelected}`;
 		const { data } = await axiosInstance.post<PlantImageResponse>(uri, formData, {
-			headers: {
-				'Content-Type': 'multipart/form-data'
+			timeout: 30_000,
+			headers: { 'Content-Type': 'multipart/form-data' },
+			onUploadProgress: (progressEvent: AxiosProgressEvent) => {
+				const progressTotal = progressEvent.total;
+				if (progressTotal) {
+					const percentage = Math.round(progressEvent.loaded * 100 / progressTotal);
+					changePercentage(percentage);
+				}
 			},
 		});
 		return data;
 	},
+};
+
+export interface ImageToUpload {
+	plantId: number;
+	isSelected: boolean;
+	formData: FormData;
+	changePercentage: (percentage: number) => void;
 };
 
 interface PlantImageResponse {
