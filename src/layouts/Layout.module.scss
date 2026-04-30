@@ -1,0 +1,28 @@
+@use '@/styles/variables' as vars;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.headerContainer {
+  background-color: vars.$color-darker;
+  color: vars.$color-lighter;
+  padding: 1rem;
+  text-align: center;
+}
+
+.mainContainer {
+  flex: 1;
+  padding: 0.5rem;
+  background-color: vars.$color-lighter;
+}
+
+.footerContainer {
+  background-color: vars.$color-darker;
+  color: vars.$color-lighter;
+  padding: 1rem;
+  text-align: center;
+}
