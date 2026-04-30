@@ -1,0 +1,32 @@
+@use '@/styles/variables' as vars;
+
+.table {
+  width: 40rem;
+}
+
+.tableHeader {
+  background-color: vars.$color-darker;
+  color: vars.$color-lighter;
+}
+
+.tableHeaderCell {
+  padding: .5rem;
+}
+
+.tableBodyRow:nth-child(odd) {
+  background-color: #e8e2d9;
+}
+
+.tableBodyCell {
+  padding: .3rem 1rem;
+
+  &.index {
+    text-align: center;
+  }
+}
+
+.iconsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}

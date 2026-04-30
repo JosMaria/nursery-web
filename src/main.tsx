@@ -9,7 +9,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { Layout } from './layouts/Layout.tsx';
 import { FileUploader } from './pages/FileUploader.tsx';
-import { HomePage } from './pages/HomePage.tsx';
+import { HomePage } from './pages/Home/HomePage.tsx';
 import { ImagePage } from './pages/ImagePage.tsx';
 
 const queryClient = new QueryClient({
