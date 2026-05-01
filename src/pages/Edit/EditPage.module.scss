@@ -1,12 +1,11 @@
 @use '@/styles/variables' as vars;
 
-.imagePageContainer {
+.editPageContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   padding: 0.5rem;
-  background-color: vars.$color-light;
 }
 
 .sectionContainer {

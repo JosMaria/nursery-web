@@ -2,6 +2,7 @@ import type { PlantDataResponse } from '../types';
 import { EyeOffIcon, PencilIcon, StarIcon } from '@/icons';
 
 import styles from './scss/Table.module.scss';
+import { Link } from 'react-router';
 
 interface TableProps {
   plants: PlantDataResponse[];
@@ -22,7 +23,12 @@ const Table = ({ plants }: TableProps) => {
           <tr className={styles.tableBodyRow} key={plantDataResponse.id}>
             <td className={`${styles.tableBodyCell} ${styles.index}`}>{index + 1}</td>
             <td className={styles.tableBodyCell}>{plantDataResponse.scientific_name}</td>
-            <td className={styles.tableBodyCell}><Icons isFavorite={plantDataResponse.is_favorite} /></td>
+            <td className={styles.tableBodyCell}>
+              <Icons
+                plantId={plantDataResponse.id}
+                isFavorite={plantDataResponse.is_favorite}
+              />
+            </td>
           </tr>
         ))}
       </tbody>
@@ -30,11 +36,19 @@ const Table = ({ plants }: TableProps) => {
   );
 }
 
-const Icons = ({ isFavorite, isVisible = false }) => (
+interface IconsProps {
+  plantId: number;
+  isFavorite: boolean;
+  isVisible?: boolean;
+}
+
+const Icons = ({ plantId, isFavorite, isVisible = false }: IconsProps) => (
   <article className={styles.iconsContainer}>
     {isFavorite && <StarIcon />}
     {!isVisible && <EyeOffIcon />}
-    <PencilIcon />
+    <Link to={`${plantId}/images`}>
+      <PencilIcon />
+    </Link>
   </article>
 );
 

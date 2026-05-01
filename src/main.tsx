@@ -8,9 +8,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { Layout } from './layouts/Layout.tsx';
+import EditPage from './pages/Edit/EditPage.tsx';
 import { FileUploader } from './pages/FileUploader.tsx';
 import { HomePage } from './pages/Home/HomePage.tsx';
-import { ImagePage } from './pages/ImagePage.tsx';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +28,7 @@ createRoot(document.getElementById('root')!).render(
           <Route>
             <Route element={<Layout />}>
               <Route index element={<HomePage />} />
-              <Route path='images' element={<ImagePage />} />
+              <Route path=':plantId/images' element={<EditPage />} />
               <Route path='upload' element={<FileUploader />} />
             </Route>
           </Route>

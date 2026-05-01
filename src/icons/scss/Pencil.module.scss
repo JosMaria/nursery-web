@@ -1,0 +1,9 @@
+@use '@/styles/variables' as vars;
+
+.icon {
+  cursor: pointer;
+
+  &:hover {
+    opacity: .5;
+  }
+}
