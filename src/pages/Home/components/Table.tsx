@@ -1,11 +1,12 @@
-import type { PlantDataResponse } from '../types';
+import type { PlantSummaryResponse } from '../types';
+import { Link } from 'react-router';
+
 import { EyeOffIcon, PencilIcon, StarIcon } from '@/icons';
 
 import styles from './scss/Table.module.scss';
-import { Link } from 'react-router';
 
 interface TableProps {
-  plants: PlantDataResponse[];
+  plants: PlantSummaryResponse[];
 }
 
 const Table = ({ plants }: TableProps) => {
@@ -27,6 +28,7 @@ const Table = ({ plants }: TableProps) => {
               <Icons
                 plantId={plantDataResponse.id}
                 isFavorite={plantDataResponse.is_favorite}
+                isVisible={plantDataResponse.is_visible}
               />
             </td>
           </tr>
@@ -39,10 +41,10 @@ const Table = ({ plants }: TableProps) => {
 interface IconsProps {
   plantId: number;
   isFavorite: boolean;
-  isVisible?: boolean;
+  isVisible: boolean;
 }
 
-const Icons = ({ plantId, isFavorite, isVisible = false }: IconsProps) => (
+const Icons = ({ plantId, isFavorite, isVisible }: IconsProps) => (
   <article className={styles.iconsContainer}>
     {isFavorite && <StarIcon />}
     {!isVisible && <EyeOffIcon />}
