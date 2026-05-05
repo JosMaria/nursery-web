@@ -1,18 +1,16 @@
-@use '@/styles/variables' as vars;
-
 .imageContainer {
   position: relative;
   object-fit: cover;
-}
 
-img {
-  width: 17rem;
-  height: 15rem;
-}
+  img {
+    width: 17rem;
+    height: 15rem;
+  }
 
-.iconPosition {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0.4rem;
+  .iconPosition {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.4rem;
+  }
 }

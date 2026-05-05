@@ -48,7 +48,7 @@ const Icons = ({ plantId, isFavorite, isVisible }: IconsProps) => (
   <article className={styles.iconsContainer}>
     {isFavorite && <StarIcon />}
     {!isVisible && <EyeOffIcon />}
-    <Link to={`${plantId}/images`}>
+    <Link to={`${plantId}/edit`}>
       <PencilIcon />
     </Link>
   </article>

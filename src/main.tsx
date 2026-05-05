@@ -10,6 +10,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Layout } from './layouts/Layout.tsx';
 import EditPage from './pages/Edit/EditPage.tsx';
 import { HomePage } from './pages/Home/HomePage.tsx';
+import { GeneralView, TaxonomyView, ImagesView } from './pages/Edit/views';
+import SelectView from './pages/Edit/views/Images/Select/SelectView.tsx';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +30,14 @@ createRoot(document.getElementById('root')!).render(
             <Route element={<Layout />}>
               <Route index element={<HomePage />} />
               <Route path='upload' element={<div>form to upload plant</div>} />
-              {/* <Route path=':plantId/images' element={<EditPage />} /> */}
+              
+              <Route path=':plantId/edit' element={<EditPage />}>
+                <Route index element={<GeneralView />} />
+                <Route path='taxonomy' element={<TaxonomyView />} />
+                <Route path='images' element={<ImagesView />}>
+                  <Route index element={<SelectView />} />
+                </Route>
+              </Route>
               {/* <Route path='upload' element={<FileUploader />} /> */}
             </Route>
           </Route>

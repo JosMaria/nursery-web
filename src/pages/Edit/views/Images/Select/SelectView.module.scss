@@ -1,0 +1,33 @@
+.sectionContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1rem;
+  width: 36rem;
+}
+
+// Wrapper to DotLoader Icon
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+
+// ImageToSelect Component
+.imageContainer {
+  position: relative;
+  object-fit: cover;
+
+  img {
+    width: 17rem;
+    height: 15rem;
+  }
+
+  .iconPosition {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.4rem;
+  }
+}
