@@ -9,7 +9,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { Layout } from './layouts/Layout.tsx';
 import EditPage from './pages/Edit/EditPage.tsx';
-import { FileUploader } from './pages/FileUploader.tsx';
 import { HomePage } from './pages/Home/HomePage.tsx';
 
 const queryClient = new QueryClient({
@@ -28,8 +27,9 @@ createRoot(document.getElementById('root')!).render(
           <Route>
             <Route element={<Layout />}>
               <Route index element={<HomePage />} />
-              <Route path=':plantId/images' element={<EditPage />} />
-              <Route path='upload' element={<FileUploader />} />
+              <Route path='upload' element={<div>form to upload plant</div>} />
+              {/* <Route path=':plantId/images' element={<EditPage />} /> */}
+              {/* <Route path='upload' element={<FileUploader />} /> */}
             </Route>
           </Route>
         </Routes>

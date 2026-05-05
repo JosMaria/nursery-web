@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 import { Button, DotLoader } from '@/components';
 import { axiosInstance } from '@/services/api';
