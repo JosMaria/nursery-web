@@ -4,8 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  margin: 1rem;
+  gap: .5rem;
+  margin: .5rem;
 }
 
 .dot {
@@ -26,13 +26,13 @@
   }
 
   &.small {
-    width: 0.75rem;
-    height: 0.75rem;
+    width: .5rem;
+    height: .5rem;
   }
 
   &.medium {
-    width: 1rem;
-    height: 1rem;
+    width: .75rem;
+    height: .75rem;
   }
 
   &.large {
@@ -43,8 +43,8 @@
 
 @keyframes bounce {
   0%, 80%, 100% {
-    transform: scale(0.75);
-    opacity: 0.5;
+    transform: scale(.75);
+    opacity: .5;
   }
   40% {
     transform: scale(1);

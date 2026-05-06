@@ -1,18 +1,40 @@
-.sectionContainer {
+@use '@/styles/variables' as vars;
+
+.selectViewContainer {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
   gap: 1rem;
-  width: 36rem;
+
+  .informationContainer {
+    background-color: vars.$color-light;
+    border: .2rem solid vars.$color-darker;
+    width: 35rem;
+    padding: .5rem;
+    font-size: small;
+    text-align: justify;
+  }
+
+  .imagesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 1rem;
+    width: 36rem;
+  }
 }
 
 // Wrapper to DotLoader Icon
 .loaderContainer {
+  justify-self: center;
   display: flex;
   flex-direction: column;
   align-content: center;
-}
 
+  i {
+    font-weight: bold;
+  }
+}
 
 // ImageToSelect Component
 .imageContainer {

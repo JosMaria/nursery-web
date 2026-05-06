@@ -5,4 +5,4 @@ export interface PlantSummaryResponse {
   is_visible: boolean;
 }
 
-export type PlantSummaryIncompleteResponse = Omit<PlantSummaryResponse, "is_visible">;
+export type PlantSummaryIncompleteResponse = Omit<PlantSummaryResponse, 'is_visible'>;

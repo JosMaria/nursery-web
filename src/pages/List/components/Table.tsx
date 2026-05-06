@@ -2,8 +2,7 @@ import type { PlantSummaryResponse } from '../types';
 import { Link } from 'react-router';
 
 import { EyeOffIcon, PencilIcon, StarIcon } from '@/icons';
-
-import styles from './scss/Table.module.scss';
+import styles from '@/pages/List/scss/Table.module.scss';
 
 interface TableProps {
   plants: PlantSummaryResponse[];
@@ -20,16 +19,12 @@ const Table = ({ plants }: TableProps) => {
         </tr>
       </thead>
       <tbody>
-        {plants.map((plantDataResponse, index) => (
-          <tr className={styles.tableBodyRow} key={plantDataResponse.id}>
+        {plants.map((plantSummaryResponse, index) => (
+          <tr className={styles.tableBodyRow} key={plantSummaryResponse.id}>
             <td className={`${styles.tableBodyCell} ${styles.index}`}>{index + 1}</td>
-            <td className={styles.tableBodyCell}>{plantDataResponse.scientific_name}</td>
+            <td className={styles.tableBodyCell}>{plantSummaryResponse.scientific_name}</td>
             <td className={styles.tableBodyCell}>
-              <Icons
-                plantId={plantDataResponse.id}
-                isFavorite={plantDataResponse.is_favorite}
-                isVisible={plantDataResponse.is_visible}
-              />
+              <Icons plantSummary={plantSummaryResponse} />
             </td>
           </tr>
         ))}
@@ -39,18 +34,19 @@ const Table = ({ plants }: TableProps) => {
 }
 
 interface IconsProps {
-  plantId: number;
-  isFavorite: boolean;
-  isVisible: boolean;
+  plantSummary: PlantSummaryResponse;
 }
 
-const Icons = ({ plantId, isFavorite, isVisible }: IconsProps) => (
+const Icons = ({ plantSummary }: IconsProps) => (
   <article className={styles.iconsContainer}>
-    {isFavorite && <StarIcon />}
-    {!isVisible && <EyeOffIcon />}
-    <Link to={`${plantId}/edit`}>
+    <Link
+      to={`${plantSummary.id}/edit`}
+      state={{ scientificName: plantSummary.scientific_name}}
+    >
       <PencilIcon />
     </Link>
+    {plantSummary.is_favorite && <StarIcon />}
+    {!plantSummary.is_visible && <EyeOffIcon />}
   </article>
 );
 

@@ -1,7 +1,7 @@
 @use '@/styles/variables' as vars;
 
 .table {
-  width: 40rem;
+  width: 30rem;
 }
 
 .tableHeader {
@@ -10,7 +10,7 @@
 }
 
 .tableHeaderCell {
-  padding: .7rem;
+  padding: .5rem;
 }
 
 .tableBodyRow:nth-child(odd) {
@@ -27,6 +27,5 @@
 
 .iconsContainer {
   display: flex;
-  justify-content: center;
   gap: 1rem;
 }

@@ -1,10 +1,13 @@
-import { NavLink, Outlet } from 'react-router';
+import { NavLink, Outlet, useLocation } from 'react-router';
 
 import styles from './EditPage.module.scss';
 
-const EditPage = () => (
-  <div className={styles.editPageContainer}>
-    <nav className={styles.navContainer}>
+const EditPage = () => {
+  const location = useLocation();
+  console.log(location);
+  return (
+    <div className={styles.editPageContainer}>
+    {/* <nav className={styles.navContainer}>
       <NavLink 
         className={({ isActive }) => `${styles.navItem} ${isActive && styles.navSelectedItem}`}
         to='.'
@@ -27,8 +30,9 @@ const EditPage = () => (
     </nav>
     <main className={styles.mainContainer}>
       <Outlet />
-    </main>
-  </div>
-);
+    </main> */}
+    </div>
+  );
+}
 
 export default EditPage;

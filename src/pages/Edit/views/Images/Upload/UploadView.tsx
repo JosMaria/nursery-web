@@ -1,12 +1,10 @@
 import { useState } from 'react';
-
-import { plantService } from '@/services/plantService';
-
-import styles from './FileUploader.module.scss';
+import styles from './UploadView.module.scss';
+import { editPageService } from '@/pages/Edit/service';
 
 type UploadStatus = 'idle' | 'error' | 'success' | 'uploading';
 
-export const FileUploader = () => {
+const UploadView = () => {
   const plantId = 5;
   const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState<UploadStatus>('idle');
@@ -27,7 +25,7 @@ export const FileUploader = () => {
       formData.append('file', file);
 
       try {
-        const plantImageResponse = await plantService.uploadPlantImage({
+        const plantImageResponse = await editPageService.uploadPlantImage({
           plantId,
           isSelected: false,
           formData,
@@ -36,8 +34,8 @@ export const FileUploader = () => {
         setStatus('success');
         setUploadProgress(100);
         console.log(plantImageResponse);
+
       } catch (e) {
-        console.log(e);
         setStatus('error');
         setUploadProgress(0);
       }
@@ -45,7 +43,7 @@ export const FileUploader = () => {
   };
 
   return (
-    <section className={styles.sectionContainer}>
+    <section className={styles.uploadViewContainer}>
       <input type='file' onChange={handleFileChange} />
       <div className={styles.informationContainer}>
         {file && (
@@ -56,10 +54,7 @@ export const FileUploader = () => {
           </article>
         )}
         {file && status !== 'uploading' && (
-          <button
-            className={styles.button}
-            onClick={() => handleFileUpload()}
-          >
+          <button className={styles.button} onClick={() => handleFileUpload()}>
               Upload File
           </button>
         )}
@@ -80,3 +75,5 @@ export const FileUploader = () => {
     </section>
   );
 }
+
+export default UploadView;

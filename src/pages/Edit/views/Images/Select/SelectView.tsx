@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
+import { Button, DotLoader } from '@/components';
 import { StarIcon } from '@/icons';
 import { editPageService } from '@/pages/Edit/service';
 import { axiosInstance } from '@/services/api';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import styles from './SelectView.module.scss';
-import { Button, DotLoader } from '@/components';
+
 import type { PathValuesImageSelect } from '@/pages/Edit/types';
 
 interface ImageToSelect {
@@ -19,8 +20,6 @@ const initialImageToSelect: ImageToSelect = {
   initialValue: 0,
   currentValue: 0,
 }
-
-
 
 const apiImageUrl = (plantId: number, imageId: number) => `${axiosInstance.defaults.baseURL}/plants/${plantId}/images/${imageId}`;
 
@@ -64,16 +63,21 @@ const SelectView = () => {
 
   if (isLoading) return (
     <div className={styles.loaderContainer}>
-      <DotLoader size='small' />
-      <i style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Cargando</i>
+      <DotLoader size='medium' />
+      <i>Cargando imagenes</i>
     </div>
   )
 
   if (error) return <p>{error.message}</p>
 
   return (
-    <>
-      <section className={styles.sectionContainer}>
+    <div className={styles.selectViewContainer}>
+      <article className={styles.informationContainer}>
+        ℹ️ La imagen marcada con el icono de la estrella sera
+        la imagen que se mostrara en el catalogo de plantas,
+        solo se podra seleccionar una imagen por planta como favorita  
+      </article>
+      <section className={styles.imagesContainer}>
         {plantImages.map(({ image_id: imageId }) => (
           <ImageToSelect
             key={imageId}
@@ -90,7 +94,7 @@ const SelectView = () => {
           changeSelectedImage={() => mutate({ plantId: plantIdNumber, imageId: valuesImageId.currentValue })}
         />
       )}
-    </>
+    </div>
   );
 }
 
