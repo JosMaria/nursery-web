@@ -10,7 +10,7 @@ export const Layout = () => (
     <div className={styles.middleContainer}>
       <aside className={styles.asideContainer}>
         <label className={styles.sectionTitle}>Planta</label>
-        <NavLink to="/" className={({ isActive }) => `${styles.link} ${isActive && styles.activeLink}`}>
+        <NavLink to="list" className={({ isActive }) => `${styles.link} ${isActive && styles.activeLink}`}>
           Ver Plantas
         </NavLink>
         <NavLink to="upload" className={({ isActive }) => `${styles.link} ${isActive && styles.activeLink}`}>

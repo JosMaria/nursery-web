@@ -1,0 +1,15 @@
+@use '@/styles/variables' as vars;
+
+.icon {
+  fill: vars.$color-darker;
+  stroke: vars.$color-lighter;
+  height: 2.5rem;
+  width: 2.5rem;
+  stroke-width: 2;
+  stroke-linecap: round;
+
+  &:hover {
+    opacity: .8;
+    cursor: pointer;
+  }
+}

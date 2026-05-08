@@ -1,0 +1,29 @@
+@use '@/styles/variables' as vars;
+
+.breadcrumbs {
+  display: flex;
+  background-color: vars.$color-light;
+  padding: .5rem;
+  width: fit-content;
+
+  .pathContainer {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: vars.$color-darker;
+
+    .currentPath {
+      background-color: vars.$color-darker;
+      color: vars.$color-lighter;
+      padding: .2rem .5rem;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+      opacity: .7;
+    }
+
+    .separator {
+      margin: 0 .5rem;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 @use '@/styles/variables' as vars;
 
-.iconContainer {
+.icon {
   display: flex;
   justify-content: center;
   border-radius: 50%;
@@ -9,6 +9,7 @@
   padding: .25rem;
   width: 1.5em;
   height: 1.5rem;
+  stroke-width: 1;
 
   &.medium {
     padding: .4rem;

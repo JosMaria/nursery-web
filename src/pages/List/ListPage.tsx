@@ -48,7 +48,7 @@ const fetchPlantSummaries = async (): Promise<PlantSummaryResponse[]> => {
   return plantSummaryList as PlantSummaryResponse[];
 }
 
-export const ListPage = () => {
+const ListPage = () => {
   const [data, setData] = useState<PlantSummaryResponse[]>([]);
 
   useEffect(() => {
@@ -66,3 +66,5 @@ export const ListPage = () => {
     </div>
   );
 }
+
+export default ListPage;

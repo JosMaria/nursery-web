@@ -40,7 +40,7 @@ interface IconsProps {
 const Icons = ({ plantSummary }: IconsProps) => (
   <article className={styles.iconsContainer}>
     <Link
-      to={`${plantSummary.id}/edit`}
+      to={`${plantSummary.id}`}
       state={{ scientificName: plantSummary.scientific_name}}
     >
       <PencilIcon />
