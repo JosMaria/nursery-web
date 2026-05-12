@@ -15,6 +15,7 @@ const obtainLabel = (segment: string) => {
   const labels = {
     'list': 'LISTADO',
     'select': 'SELECCIONAR',
+    'upload': 'SUBIR IMAGEN',
   };
 
   return labels[segment] || segment;

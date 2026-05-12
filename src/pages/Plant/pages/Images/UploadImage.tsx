@@ -1,23 +1,27 @@
 import { useState } from 'react';
-import styles from './UploadView.module.scss';
-import { editPageService } from '@/pages/Edit/service';
+import { useParams } from 'react-router';
+
+import { plantService } from '@/services/plantService';
+
+import styles from './scss/UploadImage.module.scss';
 
 type UploadStatus = 'idle' | 'error' | 'success' | 'uploading';
 
-const UploadView = () => {
-  const plantId = 5;
-  const [file, setFile] = useState<File | null>(null);
-  const [status, setStatus] = useState<UploadStatus>('idle');
-  const [uploadProgress, setUploadProgress] = useState(0);
+export const UploadImage = () => {
+	const { plantId }= useParams();
+	const [file, setFile] = useState<File | null>(null);
+	const [status, setStatus] = useState<UploadStatus>('idle');
+	const [uploadProgress, setUploadProgress] = useState(0);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
-    const files: FileList = e.target.files;
-    if (files) {
-      setFile(files[0])
-    }
-  };
+	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
+		const files: FileList = e.target.files;
+		if (files) {
+			setFile(files[0])
+		}
+	};
 
   const handleFileUpload = async () => {
+		console.log('plantId', plantId)
     if (file) {
       setStatus('uploading');
       setUploadProgress(0);
@@ -25,15 +29,15 @@ const UploadView = () => {
       formData.append('file', file);
 
       try {
-        const plantImageResponse = await editPageService.uploadPlantImage({
-          plantId,
+        const plantImageResponse = await plantService.uploadPlantImage({
+          plantId: Number.parseInt(plantId),
           isSelected: false,
           formData,
           changePercentage: (percentage: number) => setUploadProgress(percentage),
         });
         setStatus('success');
         setUploadProgress(100);
-        console.log(plantImageResponse);
+        console.log('Response', plantImageResponse)
 
       } catch (e) {
         setStatus('error');
@@ -43,7 +47,7 @@ const UploadView = () => {
   };
 
   return (
-    <section className={styles.uploadViewContainer}>
+    <section className={styles.uploadImageContainer}>
       <input type='file' onChange={handleFileChange} />
       <div className={styles.informationContainer}>
         {file && (
@@ -55,7 +59,7 @@ const UploadView = () => {
         )}
         {file && status !== 'uploading' && (
           <button className={styles.button} onClick={() => handleFileUpload()}>
-              Upload File
+            Upload File
           </button>
         )}
         {status === 'uploading' && (
@@ -75,5 +79,3 @@ const UploadView = () => {
     </section>
   );
 }
-
-export default UploadView;
