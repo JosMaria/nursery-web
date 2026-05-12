@@ -1,27 +1,38 @@
-import { Link, useLocation, useParams } from 'react-router';
+import { Link, Outlet, useLocation, useParams } from 'react-router';
 
-import styles from '@/pages/Plant/scss/Breadcrumbs.module.scss';
+import { usePlantStore } from '@/stores/plantStore';
+
+import styles from './PlantLayout.module.scss';
+
+const PlantLayout = () => (
+  <main className={styles.pageContainer}>
+    <Breadcrumbs />
+    <Outlet />
+  </main>
+);
 
 const obtainLabel = (segment: string) => {
   const labels = {
     'list': 'LISTADO',
+    'select': 'SELECCIONAR',
   };
 
   return labels[segment] || segment;
 }
 
-export const Breadcrumbs = () => {
+const Breadcrumbs = () => {
   const { plantId } = useParams()
-  const { pathname, state } = useLocation();
+  const { pathname } = useLocation();
   const splittedPaths = pathname.split('/').filter(value => value);
+  const scientificNameGlobal = usePlantStore(state => state.scientificNameGlobal);
 
   const valuesToNavigation = (value: string, index: number) => {
     const navigateTo = `/${splittedPaths.slice(0, index + 1).join('/')}`;
     const isLast = index === splittedPaths.length - 1;
-    const path = plantId === value ? state.scientificName : obtainLabel(value);
+    const path = plantId === value ? scientificNameGlobal : obtainLabel(value);
     return { navigateTo, isLast, path }
   }
-
+  
   return (
     <article className={styles.breadcrumbs}>
       {splittedPaths.map((value, index) => {
@@ -40,3 +51,5 @@ export const Breadcrumbs = () => {
     </article>
   );
 }
+
+export default PlantLayout;

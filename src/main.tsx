@@ -8,10 +8,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { Layout } from './layouts/Layout.tsx';
+import PlantLayout from './layouts/PlantLayout.tsx';
 import EditPage from './pages/Edit/EditPage.tsx';
 import { GeneralView, ImagesView, TaxonomyView } from './pages/Edit/views';
-import SelectView from './pages/Edit/views/Images/Select/SelectView.tsx';
-import { HomePage, ListPage, PlantPage } from './pages/index.ts';
+import { HomePage, ListPage, PlantPage, SelectView } from './pages/index.ts';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,7 +30,10 @@ createRoot(document.getElementById('root')!).render(
             <Route element={<Layout />}>
               <Route index element={<HomePage />} />
               <Route path='list' element={<ListPage />} />
-              <Route path='list/:plantId' element={<PlantPage />} />
+              <Route path='list/:plantId' element={<PlantLayout />}>
+                <Route index element={<PlantPage />} />
+                <Route path='select' element={<SelectView />} />
+              </Route>
 
               <Route path='upload' element={<div>form to upload plant</div>} />
               <Route path=':plantId/edit' element={<EditPage />}>

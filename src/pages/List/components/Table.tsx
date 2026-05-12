@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 import { EyeOffIcon, PencilIcon, StarIcon } from '@/icons';
 import styles from '@/pages/List/scss/Table.module.scss';
+import { usePlantStore } from '@/stores/plantStore';
 
 interface TableProps {
   plants: PlantSummaryResponse[];
@@ -37,17 +38,20 @@ interface IconsProps {
   plantSummary: PlantSummaryResponse;
 }
 
-const Icons = ({ plantSummary }: IconsProps) => (
-  <article className={styles.iconsContainer}>
-    <Link
-      to={`${plantSummary.id}`}
-      state={{ scientificName: plantSummary.scientific_name}}
-    >
-      <PencilIcon />
-    </Link>
-    {plantSummary.is_favorite && <StarIcon />}
-    {!plantSummary.is_visible && <EyeOffIcon />}
-  </article>
-);
+const Icons = ({ plantSummary }: IconsProps) => {
+  const updateScientificName = usePlantStore(state => state.updateScientificName);
+  return (
+    <article className={styles.iconsContainer}>
+      <Link
+        to={`${plantSummary.id}`}
+        onClick={() => updateScientificName(plantSummary.scientific_name)}
+      >
+        <PencilIcon />
+      </Link>
+      {plantSummary.is_favorite && <StarIcon />}
+      {!plantSummary.is_visible && <EyeOffIcon />}
+    </article>
+  );
+}
 
 export default Table;
