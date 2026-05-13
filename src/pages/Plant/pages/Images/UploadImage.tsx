@@ -37,6 +37,11 @@ export const UploadImage = () => {
 		setFiles(prevFiles => [...prevFiles, ...Array.from(filesToUpload)])
 	}
 
+	const handleRemove = (filename: string) => {
+		const filteredFiles = files.filter(file => file.name !== filename)
+		setFiles(filteredFiles)
+	}
+
 	return (
 		<div className={styles.uploadImageContainer}>
 			<section
@@ -74,13 +79,16 @@ export const UploadImage = () => {
 						</div>
 						<div className={styles.iconContainer}>
 							<UploadIcon />
-							<CloseIcon />
+							<div onClick={() => handleRemove(file.name)}>
+								<CloseIcon />
+							</div>
 						</div>
 					</article>
 				))}
 			</section>
 		</div>
 	);
+	
 }
 
 const adjustSize = (size: number) => {
