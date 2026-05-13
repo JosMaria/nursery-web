@@ -1,51 +1,125 @@
 @use '@/styles/variables' as vars;
 
 .uploadImageContainer {
-  display: flex;
-  justify-content: center;
-  padding: 0;
-  background-color: vars.$color-light;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
-  .informationContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    width: 40rem;
+	.dropZone {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: .5rem;
+		width: 30rem;
+		height: 20rem;
+		border: .25rem vars.$color-lighter;
+		border-style: dashed;
+		background-color: white;
+		transition: all .3s;
+		border-radius: .9rem;
 
-    .imageInformation {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      border: 0.3rem solid vars.$color-darker;
-    }
+		&.dropZoneOver {
+			background-color: vars.$color-light;
+		}
 
-    .button {
-      background-color: vars.$color-darker;
-      color: vars.$color-lighter;
-      padding: 0.5rem 1.3rem;
-      font-size: 1.1rem;
-      border-radius: 0.2rem;
-      cursor: pointer;
-    }
-  }
+		.dragAndDropText {
+			font-size: 1.2rem;
+			font-weight: bold;
+		}
+
+		.inputDropZone {
+			display: none;
+		}
+
+		.buttonUploadImage {
+			background-color: vars.$color-darker;
+			color: white;
+			padding: .5rem 1.5rem;
+			border-radius: .2rem;
+
+			&:hover {
+				opacity: .8;
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.previewContainer {
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
+
+	.previewInfo {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: .5rem;
+		background-color: aliceblue;
+
+		.previewImage {
+			width: 4rem;
+			height: 3rem;
+			border-radius: .5rem;
+		}
+		
+		.previewText {
+			font-size: 1.1rem;
+
+			span {
+				color: blue;
+				font-size: .9rem;
+			}
+		}
+	}
+}
+
+.uploadImageContainer {
+	display: flex;
+	justify-content: center;
+	padding: 0;
+
+	.informationContainer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		width: 40rem;
+
+		.imageInformation {
+			display: flex;
+			flex-direction: column;
+			padding: 1rem;
+			border: 0.3rem solid vars.$color-darker;
+		}
+
+		.button {
+			background-color: vars.$color-darker;
+			color: vars.$color-lighter;
+			padding: 0.5rem 1.3rem;
+			font-size: 1.1rem;
+			border-radius: 0.2rem;
+			cursor: pointer;
+		}
+	}
 }
 
 .progressContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
 
-  .progressBar {
-    width: 50%;
-    height: 1.8rem;
-    border: 0.2rem solid vars.$color-darker;
+	.progressBar {
+		width: 50%;
+		height: 1.8rem;
+		border: 0.2rem solid vars.$color-darker;
 
-    .progressFill {
-      transition: width 0.3s ease-out;
-      background-color: vars.$color-darker;
-      height: 100%;
-    }
-  }
+		.progressFill {
+			transition: width 0.3s ease-out;
+			background-color: vars.$color-darker;
+			height: 100%;
+		}
+	}
 }
