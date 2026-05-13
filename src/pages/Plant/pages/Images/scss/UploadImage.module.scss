@@ -51,36 +51,48 @@
     display: flex;
     flex-direction: column;
     gap: .5rem;
+		width: 100%;
 
-    .previewInfo {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
+		.previewInfoContainer {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: .5rem;
 			border-radius: .5rem;
-      padding: .5rem;
-      background-color: white;
+			padding: .5rem;
+			background-color: white;
 
-      .previewImage {
-        width: 4rem;
-        height: 3rem;
-        border-radius: .5rem;
-      }
-      
-      .previewInfoText {
-				p {
-					font-size: 1.1rem;
-					width: 20rem;
-					overflow: hidden;
-					white-space: nowrap;
-					text-overflow: ellipsis;
+			.previewInfo {
+				display: flex;
+				align-items: center;
+				gap: .5rem;
+
+				.previewImage {
+					width: 4rem;
+					height: 3rem;
+					border-radius: .5rem;
 				}
+				
+				.previewInfoText {
+					p {
+						font-size: 1rem;
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+					}
 
-        span {
-          color: vars.$color-darker;
-          font-size: .9rem;
-        }
-      }
-    }
+					span {
+						color: vars.$color-darker;
+						font-size: .9rem;
+					}
+				}
+			}
+
+			.iconContainer {
+				display: flex;
+				gap: .5rem;
+			}
+		}
   }
 }
 

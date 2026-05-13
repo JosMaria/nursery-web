@@ -5,4 +5,9 @@
   stroke: red;
   stroke-width: 2;
   stroke-linecap: square;
+
+  &:hover {
+    cursor: pointer;
+    opacity: .8;
+  }
 }

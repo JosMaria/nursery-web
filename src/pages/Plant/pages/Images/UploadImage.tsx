@@ -4,6 +4,8 @@ import { useParams } from 'react-router';
 import { plantService } from '@/services/plantService';
 
 import styles from './scss/UploadImage.module.scss';
+import { CloseIcon } from '@/icons';
+import UploadIcon from '@/icons/Upload';
 
 export const UploadImage = () => {
 	const [files, setFiles] = useState<File[]>([]);
@@ -52,19 +54,27 @@ export const UploadImage = () => {
 					multiple
 					onChange={handleChange}
 				/>
-				<label className={styles.buttonUploadImage} htmlFor='file-input'>Browser Files</label>
+				<label className={styles.buttonUploadImage} htmlFor='file-input'>
+					Browser Files
+				</label>
 			</section>
 			<section className={styles.previewContainer}>
 				{files.map((file, index) => (
-					<article className={styles.previewInfo} key={index}>
-						<img
-							className={styles.previewImage}
-							src={URL.createObjectURL(file)}
-							alt={file.name}
-						/>
-						<div className={styles.previewInfoText}>
-							<p>{file.name}</p>
-							<span>{adjustSize(file.size)}</span>
+					<article className={styles.previewInfoContainer} key={index}>
+						<div className={styles.previewInfo}>
+							<img
+								className={styles.previewImage}
+								src={URL.createObjectURL(file)}
+								alt={file.name}
+							/>
+							<div className={styles.previewInfoText}>
+								<p>{file.name}</p>
+								<span>{adjustSize(file.size)}</span>
+							</div>
+						</div>
+						<div className={styles.iconContainer}>
+							<UploadIcon />
+							<CloseIcon />
 						</div>
 					</article>
 				))}

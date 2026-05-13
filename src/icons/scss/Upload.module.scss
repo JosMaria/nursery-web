@@ -1,0 +1,22 @@
+@use '@/styles/variables' as vars;
+
+.iconContainer {
+  padding: .2rem;
+  border-radius: 20%;
+  background-color: vars.$color-light;
+
+  &:hover {
+    opacity: .8;
+    cursor: pointer;
+  }
+
+  .icon {
+    width: 1.5rem;
+    height: 1.4rem;
+    fill: none;
+    stroke: vars.$color-darker;
+    stroke-width: 3;
+    stroke-linecap: round;
+    border-radius: .2;
+  }
+}
