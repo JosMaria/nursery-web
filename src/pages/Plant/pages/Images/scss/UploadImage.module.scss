@@ -4,6 +4,8 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	gap: 1rem;
+	width: 30rem;
 
 	.dropZone {
 		display: flex;
@@ -11,7 +13,7 @@
 		align-items: center;
 		justify-content: center;
 		gap: .5rem;
-		width: 30rem;
+		width: 100%;
 		height: 20rem;
 		border: .25rem vars.$color-lighter;
 		border-style: dashed;
@@ -44,35 +46,42 @@
 			}
 		}
 	}
-}
 
-.previewContainer {
-	display: flex;
-	flex-direction: column;
-	gap: .5rem;
+	.previewContainer {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 
-	.previewInfo {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		padding: .5rem;
-		background-color: aliceblue;
-
-		.previewImage {
-			width: 4rem;
-			height: 3rem;
+    .previewInfo {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
 			border-radius: .5rem;
-		}
-		
-		.previewText {
-			font-size: 1.1rem;
+      padding: .5rem;
+      background-color: white;
 
-			span {
-				color: blue;
-				font-size: .9rem;
-			}
-		}
-	}
+      .previewImage {
+        width: 4rem;
+        height: 3rem;
+        border-radius: .5rem;
+      }
+      
+      .previewInfoText {
+				p {
+					font-size: 1.1rem;
+					width: 20rem;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+				}
+
+        span {
+          color: vars.$color-darker;
+          font-size: .9rem;
+        }
+      }
+    }
+  }
 }
 
 .uploadImageContainer {

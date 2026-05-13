@@ -16,8 +16,6 @@ export const UploadImage = () => {
 
 	const handleDragAOver = (event: React.DragEvent<HTMLDivElement>) => {
 		event.preventDefault();
-		// setIsDraggingOver(true);
-		// setMessage("esta sobre el elemento")
 	};
 	
 	const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
@@ -56,8 +54,38 @@ export const UploadImage = () => {
 				/>
 				<label className={styles.buttonUploadImage} htmlFor='file-input'>Browser Files</label>
 			</section>
+			<section className={styles.previewContainer}>
+				{files.map((file, index) => (
+					<article className={styles.previewInfo} key={index}>
+						<img
+							className={styles.previewImage}
+							src={URL.createObjectURL(file)}
+							alt={file.name}
+						/>
+						<div className={styles.previewInfoText}>
+							<p>{file.name}</p>
+							<span>{adjustSize(file.size)}</span>
+						</div>
+					</article>
+				))}
+			</section>
 		</div>
 	);
+}
+
+const adjustSize = (size: number) => {
+	const unit = 1_024;
+	if (size < unit) {
+		return size.toFixed(2) + ' B';
+	} else {
+		let compressedSize = size / unit;
+		if (compressedSize < unit) {
+			return compressedSize.toFixed(2) + ' KB';
+		} else {
+			compressedSize = compressedSize / unit;
+			return compressedSize.toFixed(2) + ' MB';
+		}
+	}
 }
 // type UploadStatus = 'idle' | 'error' | 'success' | 'uploading';
 
