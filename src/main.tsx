@@ -9,7 +9,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { Layout } from './layouts/Layout.tsx';
 import PlantLayout from './layouts/PlantLayout.tsx';
-import { HomePage, ListPage, PlantPage, SelectImage, UploadImage } from './pages/index.ts';
+import { DeleteImage, HomePage, ListPage, PlantPage, SelectImage, UploadImage } from './pages';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -32,6 +32,7 @@ createRoot(document.getElementById('root')!).render(
 								<Route index element={<PlantPage />} />
 								<Route path='select' element={<SelectImage />} />
 								<Route path='upload' element={<UploadImage />} />
+								<Route path='delete' element={<DeleteImage />} />
 							</Route>
 						</Route>
 					</Route>
