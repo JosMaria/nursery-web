@@ -1,11 +1,12 @@
 @use '@/styles/variables' as vars;
 
 .uploadImageContainer {
+	align-self: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 1rem;
-	width: 30rem;
+	width: 35rem;
 
 	.dropZone {
 		display: flex;
@@ -136,11 +137,6 @@
 				font-size: .8rem;
 				padding: .1rem;
 				color: white;
-
-				&.idle {
-					color: black;
-					background-color: vars.$color-lighter;
-				}
 
 				&.success {
 					background-color: vars.$color-darker;
