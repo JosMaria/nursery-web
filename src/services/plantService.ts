@@ -1,7 +1,7 @@
 import type { AxiosProgressEvent } from 'axios';
 import { axiosInstance } from './api';
 
-import type { ImageSelectionResponse } from "./types";
+import type { ImageSelectionResponse, ImageToUpload } from "./types";
 
 export const plantService = {
 	getImagesToSelection: async (plantId: number) => {
@@ -28,13 +28,6 @@ export const plantService = {
 		});
 		return data;
 	},
-};
-
-export interface ImageToUpload {
-	plantId: number;
-	isSelected: boolean;
-	formData: FormData;
-	changePercentage: (percentage: number) => void;
 };
 
 interface PlantImageResponse {

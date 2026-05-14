@@ -47,55 +47,111 @@
 		}
 	}
 
-	.previewContainer {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
+	.previewImagesContainer {
+		display: flex;
+		flex-direction: column;
+		gap: .5rem;
 		width: 100%;
 
-		.previewInfoContainer {
+		.previewImageContainer {
 			display: flex;
-			justify-content: space-between;
-			align-items: center;
+			flex-direction: column;
 			gap: .5rem;
+			width: 100%;
+			background-color: white;
 			border-radius: .5rem;
 			padding: .5rem;
-			background-color: white;
 
-			.previewInfo {
+			&.previewImageSuccess {
+				border: .2rem solid vars.$color-darker;
+				background-color: vars.$color-light;
+			}
+
+			.previewInfoContainer {
 				display: flex;
+				justify-content: space-between;
 				align-items: center;
 				gap: .5rem;
 
-				.previewImage {
-					width: 4rem;
-					height: 3rem;
-					border-radius: .5rem;
-				}
-				
-				.previewInfoText {
-					width: 18rem;
-					p {
-						
-						font-size: 1rem;
-						overflow: hidden;
-						white-space: nowrap;
-						text-overflow: clip;
-					}
+				.previewInfo {
+					display: flex;
+					align-items: center;
+					gap: .5rem;
 
-					span {
-						color: vars.$color-darker;
-						font-size: .9rem;
+					.previewImage {
+						width: 4rem;
+						height: 3rem;
+						border-radius: .5rem;
+					}
+					
+					.previewInfoText {
+						width: 18rem;
+						p {
+							
+							font-size: 1rem;
+							overflow: hidden;
+							white-space: nowrap;
+							text-overflow: clip;
+						}
+
+						span {
+							color: vars.$color-darker;
+							font-size: .9rem;
+						}
+					}
+				}
+
+				.iconContainer {
+					display: flex;
+					gap: .5rem;
+				}
+			}
+
+			.progressContainer {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: .4rem;
+				width: 100%;
+
+				p {
+					font-size: .9rem;
+				}
+
+				.progressBar {
+					width: 20rem;
+					height: 1rem;
+					border: 0.2rem solid vars.$color-darker;
+
+					.progressFill {
+						transition: width 0.3s ease-out;
+						background-color: vars.$color-darker;
+						height: 100%;
 					}
 				}
 			}
 
-			.iconContainer {
-				display: flex;
-				gap: .5rem;
+			.textUploadStatus {
+				text-align: center;
+				font-size: .8rem;
+				padding: .1rem;
+				color: white;
+
+				&.idle {
+					color: black;
+					background-color: vars.$color-lighter;
+				}
+
+				&.success {
+					background-color: vars.$color-darker;
+				}
+
+				&.error {
+					background-color: red;
+				}
 			}
 		}
-  }
+	}
 }
 
 .uploadImageContainer {
@@ -128,21 +184,21 @@
 	}
 }
 
-.progressContainer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 100%;
+// .progressContainer {
+// 	display: flex;
+// 	flex-direction: column;
+// 	align-items: center;
+// 	width: 100%;
 
-	.progressBar {
-		width: 50%;
-		height: 1.8rem;
-		border: 0.2rem solid vars.$color-darker;
+// 	.progressBar {
+// 		width: 50%;
+// 		height: 1.8rem;
+// 		border: 0.2rem solid vars.$color-darker;
 
-		.progressFill {
-			transition: width 0.3s ease-out;
-			background-color: vars.$color-darker;
-			height: 100%;
-		}
-	}
-}
+// 		.progressFill {
+// 			transition: width 0.3s ease-out;
+// 			background-color: vars.$color-darker;
+// 			height: 100%;
+// 		}
+// 	}
+// }

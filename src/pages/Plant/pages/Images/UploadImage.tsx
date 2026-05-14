@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
 
+import { CloseIcon, UploadIcon } from '@/icons';
 import { plantService } from '@/services/plantService';
 
 import styles from './scss/UploadImage.module.scss';
-import { CloseIcon } from '@/icons';
-import UploadIcon from '@/icons/Upload';
 
 export const UploadImage = () => {
 	const [files, setFiles] = useState<File[]>([]);
@@ -38,8 +37,7 @@ export const UploadImage = () => {
 	}
 
 	const handleRemove = (filename: string) => {
-		const filteredFiles = files.filter(file => file.name !== filename)
-		setFiles(filteredFiles)
+		setFiles(prevFiles => prevFiles.filter(file => file.name !== filename))
 	}
 
 	return (
@@ -63,33 +61,100 @@ export const UploadImage = () => {
 					Browser Files
 				</label>
 			</section>
-			<section className={styles.previewContainer}>
-				{files.map((file, index) => (
-					<article className={styles.previewInfoContainer} key={index}>
-						<div className={styles.previewInfo}>
-							<img
-								className={styles.previewImage}
-								src={URL.createObjectURL(file)}
-								alt={file.name}
-							/>
-							<div className={styles.previewInfoText}>
-								<p>{file.name}</p>
-								<span>{adjustSize(file.size)}</span>
-							</div>
-						</div>
-						<div className={styles.iconContainer}>
-							<UploadIcon />
-							<div onClick={() => handleRemove(file.name)}>
-								<CloseIcon />
-							</div>
-						</div>
-					</article>
-				))}
+			<section className={styles.previewImagesContainer}>
+				{files.map((file, index) =>
+					<PreviewImage
+						key={index}
+						file={file}
+						remove={filename => handleRemove(filename)}
+					/>
+				)}
 			</section>
 		</div>
 	);
-	
 }
+
+type UploadStatusType = 'idle' | 'error' | 'success' | 'uploading'
+
+interface PreviewImageProps {
+	file: File;
+	remove: (filename: string) => void;
+}
+
+const PreviewImage = ({ file, remove }: PreviewImageProps) => {
+	const { plantId } = useParams();
+	const [uploadStatus, setUploadStatus] = useState<UploadStatusType>('idle');
+	const [uploadProgress, setUploadProgress] = useState(0);
+
+	const handleUploadFile = async () => {
+		setUploadStatus('uploading');
+		setUploadProgress(0);
+		const formData = new FormData();
+		formData.append('file', file);
+		
+		try {
+			const plantImageResponse = await plantService.uploadPlantImage({
+				plantId: Number.parseInt(plantId),
+				isSelected: false,
+				formData,
+				changePercentage: (percentage: number) => setUploadProgress(percentage),
+			});
+			setUploadStatus('success');
+			setUploadProgress(100);
+			console.log('Response', plantImageResponse)
+
+		} catch (error) {
+				setUploadStatus('error');
+				setUploadProgress(0);
+		}
+	}
+
+	return (
+		<div className={`${styles.previewImageContainer} ${uploadStatus === 'success' && styles.previewImageSuccess}`}>
+			<article className={styles.previewInfoContainer}>
+				<div className={styles.previewInfo}>
+					<img
+						className={styles.previewImage}
+						src={URL.createObjectURL(file)}
+						alt={file.name}
+					/>
+					<div className={styles.previewInfoText}>
+						<p>{file.name}</p>
+						<span>{adjustSize(file.size)}</span>
+					</div>
+				</div>
+				{(uploadStatus === 'idle' || uploadStatus === 'error') && (
+					<div className={styles.iconContainer}>
+						<UploadIcon upload={() => handleUploadFile()} />
+						<CloseIcon close={() => remove(file.name)} />
+					</div>
+				)}
+			</article>
+			{uploadStatus === 'uploading'
+				? <UploadDetails progress={uploadProgress} />
+				: <p className={`${styles.textUploadStatus}
+						${uploadStatus === 'idle' ? styles.idle : uploadStatus === 'success' ? styles.success : styles.error}`}>
+						{uploadStatus}
+					</p>}
+		</div>
+	)
+}
+
+interface UploadDetailsProps {
+	progress: number;
+}
+
+const UploadDetails = ({ progress }: UploadDetailsProps) => (
+	<div className={styles.progressContainer}>
+		<div className={styles.progressBar}>
+			<div
+				className={styles.progressFill}
+				style={{ width: `${progress}%` }}
+			/>
+		</div>
+		<p>{progress}%</p>
+	</div>
+);
 
 const adjustSize = (size: number) => {
 	const unit = 1_024;
